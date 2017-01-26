@@ -20,6 +20,11 @@ public class ContactCreationTests {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wd.get("http://localhost:8080/addressbook/");
+        login();
+
+    }
+
+    private void login() {
         wd.findElement(By.name("pass")).click();
         wd.findElement(By.name("pass")).sendKeys("\\undefined");
         wd.findElement(By.name("user")).click();
@@ -31,12 +36,25 @@ public class ContactCreationTests {
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-
     }
-    
+
     @Test
     public void testContactCreation() {
-        wd.findElement(By.linkText("add new")).click();
+        gotoAddContactPage();
+        fillContactForm();
+        enteringContactInfo();
+        returnToHomePage();
+    }
+
+    private void returnToHomePage() {
+        wd.findElement(By.xpath("//div/div[4]/div/i/a[2]")).click();
+    }
+
+    private void enteringContactInfo() {
+        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    private void fillContactForm() {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys("Nikita");
@@ -51,14 +69,16 @@ public class ContactCreationTests {
         wd.findElement(By.name("company")).sendKeys("Home");
         wd.findElement(By.name("address")).click();
         wd.findElement(By.name("address")).clear();
-        wd.findElement(By.name("address")).sendKeys("nikita.bakiassniy@gmail.com");
+        wd.findElement(By.name("address")).sendKeys("nikita.baliassniy@gmail.com");
         wd.findElement(By.name("home")).click();
         wd.findElement(By.name("home")).clear();
         wd.findElement(By.name("home")).sendKeys("+79787397913");
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-        wd.findElement(By.xpath("//div/div[4]/div/i/a[2]")).click();
     }
-    
+
+    private void gotoAddContactPage() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
