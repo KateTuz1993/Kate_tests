@@ -3,18 +3,17 @@ package ru.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class NafigationHelper {
-    private FirefoxDriver wd;
+public class NafigationHelper extends HelperBase{
 
     public NafigationHelper(FirefoxDriver wd) {
-        this.wd= wd;
+        super(wd);
     }
 
     public void gotoGroupPage() {
-       wd.findElement(By.linkText("groups")).click();
+       click(By.linkText("groups"));
     }
 
     public void gotoAddContactPage() {
-        wd.findElement(By.linkText("add new")).click();
+        click(By.linkText("add new"));
     }
 }
