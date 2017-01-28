@@ -1,4 +1,4 @@
-package ru;
+package ru.models;
 
 public class ContactData {
     private final String firstname;
