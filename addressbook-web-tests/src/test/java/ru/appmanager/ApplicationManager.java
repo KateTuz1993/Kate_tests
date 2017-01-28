@@ -3,13 +3,14 @@ package ru.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.models.ContactData;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-
-    private final GroupHelper groupHelper = new GroupHelper();
+    FirefoxDriver wd;
+    private ContactHelper contactHelper;
+    private NafigationHelper nafigationHelper;
+    private GroupHelper groupHelper;
 
     public static boolean isAlertPresent(FirefoxDriver wd) {
         try {
@@ -21,68 +22,42 @@ public class ApplicationManager {
     }
 
     public void init() {
-        groupHelper.wd = new FirefoxDriver();
-        groupHelper.wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        groupHelper.wd.get("http://localhost:8080/addressbook/");
+        wd = new FirefoxDriver();
+        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        wd.get("http://localhost:8080/addressbook/");
+        groupHelper = new GroupHelper(wd);
+        nafigationHelper = new NafigationHelper(wd);
+        contactHelper = new ContactHelper(wd);
         login("admin", "secret");
     }
 
-    public void gotoGroupPage() {
-        groupHelper.wd.findElement(By.linkText("groups")).click();
-    }
-
     private void login(String username, String password) {
-        groupHelper.wd.findElement(By.name("pass")).click();
-        groupHelper.wd.findElement(By.name("pass")).sendKeys("\\undefined");
-        groupHelper.wd.findElement(By.name("user")).click();
-        groupHelper.wd.findElement(By.name("user")).clear();
-        groupHelper.wd.findElement(By.name("user")).sendKeys(username);
-        groupHelper.wd.findElement(By.name("user")).click();
-        groupHelper.wd.findElement(By.id("LoginForm")).click();
-        groupHelper.wd.findElement(By.name("pass")).click();
-        groupHelper.wd.findElement(By.name("pass")).clear();
-        groupHelper.wd.findElement(By.name("pass")).sendKeys(password);
-        groupHelper.wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-    }
-
-    public void returnToHomePage() {
-        groupHelper.wd.findElement(By.xpath("//div/div[4]/div/i/a[2]")).click();
-    }
-
-    public void enteringContactInfo() {
-        groupHelper.wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-    }
-
-    public void fillContactForm(ContactData contactData) {
-        groupHelper.wd.findElement(By.name("firstname")).click();
-        groupHelper.wd.findElement(By.name("firstname")).clear();
-        groupHelper.wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
-        groupHelper.wd.findElement(By.name("middlename")).click();
-        groupHelper.wd.findElement(By.name("middlename")).clear();
-        groupHelper.wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddlename());
-        groupHelper.wd.findElement(By.name("lastname")).click();
-        groupHelper.wd.findElement(By.name("lastname")).clear();
-        groupHelper.wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
-        groupHelper.wd.findElement(By.name("company")).click();
-        groupHelper.wd.findElement(By.name("company")).clear();
-        groupHelper.wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
-        groupHelper.wd.findElement(By.name("address")).click();
-        groupHelper.wd.findElement(By.name("address")).clear();
-        groupHelper.wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
-        groupHelper.wd.findElement(By.name("home")).click();
-        groupHelper.wd.findElement(By.name("home")).clear();
-        groupHelper.wd.findElement(By.name("home")).sendKeys(contactData.getHome_tel());
-    }
-
-    public void gotoAddContactPage() {
-        groupHelper.wd.findElement(By.linkText("add new")).click();
+        wd.findElement(By.name("pass")).click();
+        wd.findElement(By.name("pass")).sendKeys("\\undefined");
+        wd.findElement(By.name("user")).click();
+        wd.findElement(By.name("user")).clear();
+        wd.findElement(By.name("user")).sendKeys(username);
+        wd.findElement(By.name("user")).click();
+        wd.findElement(By.id("LoginForm")).click();
+        wd.findElement(By.name("pass")).click();
+        wd.findElement(By.name("pass")).clear();
+        wd.findElement(By.name("pass")).sendKeys(password);
+        wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
     }
 
     public void stop() {
-        groupHelper.wd.quit();
+        wd.quit();
     }
 
     public GroupHelper getGroupHelper() {
         return groupHelper;
+    }
+
+    public NafigationHelper getNafigationHelper() {
+        return nafigationHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
     }
 }
