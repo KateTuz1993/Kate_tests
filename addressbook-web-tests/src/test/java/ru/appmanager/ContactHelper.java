@@ -21,28 +21,33 @@ public class ContactHelper extends HelperBase{
 
     public void fillContactForm(ContactData contactData) {
         type(By.name("firstname"),contactData.getFirstname());
-        //wd.findElement(By.name("firstname")).click();
-       //wd.findElement(By.name("firstname")).clear();
-        //wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
         type(By.name("middlename"),contactData.getMiddlename());
-        //wd.findElement(By.name("middlename")).click();
-        //wd.findElement(By.name("middlename")).clear();
-        //wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddlename());
         type(By.name("lastname"),contactData.getLastname());
-        //wd.findElement(By.name("lastname")).click();
-        //wd.findElement(By.name("lastname")).clear();
-        //wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
         type(By.name("company"),contactData.getCompany());
-        //wd.findElement(By.name("company")).click();
-        //wd.findElement(By.name("company")).clear();
-        //wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
         type(By.name("address"),contactData.getAddress());
-        //wd.findElement(By.name("address")).click();
-        //wd.findElement(By.name("address")).clear();
-        //wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
         type(By.name("home"),contactData.getHome_tel());
-        //wd.findElement(By.name("home")).click();
-        //wd.findElement(By.name("home")).clear();
-        //wd.findElement(By.name("home")).sendKeys(contactData.getHome_tel());
+    }
+
+    public void selectContact() {
+        if (!wd.findElement(By.id("12")).isSelected()) {
+            wd.findElement(By.id("12")).click();
+        }
+
+    }
+
+    public void deleteSelectedContacts() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    }
+
+    public void initContactModify() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    public void submitContactModification() {
+        click(By.xpath("//div[@id='content']/form[1]/input[22]"));
+    }
+
+    public void returnToHomePageFromModify() {
+        click(By.linkText("home page"));
     }
 }
