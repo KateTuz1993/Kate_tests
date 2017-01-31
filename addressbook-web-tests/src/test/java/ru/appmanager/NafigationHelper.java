@@ -1,11 +1,12 @@
 package ru.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NafigationHelper extends HelperBase{
 
-    public NafigationHelper(FirefoxDriver wd) {
+    public NafigationHelper(WebDriver wd) {
         super(wd);
     }
 
