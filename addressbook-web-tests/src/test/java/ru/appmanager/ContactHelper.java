@@ -28,12 +28,7 @@ public class ContactHelper extends HelperBase{
         type(By.name("home"),contactData.getHome_tel());
     }
 
-    public void selectContact() {
-        if (!wd.findElement(By.id("12")).isSelected()) {
-            wd.findElement(By.id("12")).click();
-        }
-
-    }
+    public void selectContact() {click(By.name("selected[]"));    }
 
     public void deleteSelectedContacts() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
@@ -50,4 +45,6 @@ public class ContactHelper extends HelperBase{
     public void returnToHomePageFromModify() {
         click(By.linkText("home page"));
     }
+
+    public void acceptContactDeletion() { wd.switchTo().alert().accept();    }
 }
