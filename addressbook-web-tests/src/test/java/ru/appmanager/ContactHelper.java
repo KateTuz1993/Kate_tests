@@ -1,9 +1,13 @@
 package ru.appmanager;
 
+import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import ru.models.ContactData;
+//import org.openqa.selenium.support.ui.Select;
 
 public class ContactHelper extends HelperBase{
 
@@ -20,14 +24,23 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"),contactData.getFirstname());
         type(By.name("middlename"),contactData.getMiddlename());
         type(By.name("lastname"),contactData.getLastname());
         type(By.name("company"),contactData.getCompany());
         type(By.name("address"),contactData.getAddress());
         type(By.name("home"),contactData.getHome_tel());
+
+        if (creation){ //если это форма для создания нового контакта
+            new org.openqa.selenium.support.ui.Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else { // если это форма модификации контакте
+            Assert.assertFalse(isElementPresent(By.name("new_group"))); isElementPresent(By.name("new_group")); //проверка, существует ли поле выбора группы на форме создания (или модификации) контакта
+        }
+
+
     }
+
 
     public void selectContact() {click(By.name("selected[]"));    }
 
