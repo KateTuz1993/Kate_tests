@@ -9,12 +9,22 @@ public class NafigationHelper extends HelperBase{
     public NafigationHelper(WebDriver wd) {
         super(wd);
     }
-
+//добавлены проверки: необходимо ли делать этот клик? можно не делать его, если мы уже находимся на нужной странице
     public void gotoGroupPage() {
+       if (isElementPresent(By.tagName("h1")) //на странице присутствует заголовок
+               && wd.findElement(By.tagName("h1")).getText().equals("Groups") //название заголовка Groups
+               && isElementPresent(By.name("new"))){   // и присутствует элемент с названием New(кнопка)
+           return;
+       }
        click(By.linkText("groups"));
     }
 
     public void gotoAddContactPage() {
+
+        if (isElementPresent(By.tagName("h1"))  //на странице присутствует заголовок
+                && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry") ){ //название заголовка Edit ...
+            return;
+        }
         click(By.linkText("add new"));
     }
 }
