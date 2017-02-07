@@ -35,7 +35,8 @@ public class ContactHelper extends HelperBase{
         if (creation){ //если это форма для создания нового контакта
             new org.openqa.selenium.support.ui.Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else { // если это форма модификации контакте
-            Assert.assertFalse(isElementPresent(By.name("new_group"))); isElementPresent(By.name("new_group")); //проверка, существует ли поле выбора группы на форме создания (или модификации) контакта
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+            //isElementPresent(By.name("new_group")); //проверка, существует ли поле выбора группы на форме создания (или модификации) контакта
         }
 
 
@@ -73,7 +74,9 @@ public class ContactHelper extends HelperBase{
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getGroupCount() {
-        return wd.findElements(By.name("selected[]"));
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
     }
+
+
 }
