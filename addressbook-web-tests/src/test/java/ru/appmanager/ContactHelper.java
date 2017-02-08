@@ -43,14 +43,18 @@ public class ContactHelper extends HelperBase{
     }
 
 
-    public void selectContact() {click(By.name("selected[]"));    }
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click(); //выбор элемента по инедксу
+        //click(By.name("selected[]"));
+         }
 
     public void deleteSelectedContacts() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
-    public void initContactModify() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    public void initContactModify(int index) {
+        wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElements(By.tagName("a")).get(0).findElements(By.tagName("img")).get(0).click();  //выбор элемента по инедксу
+        //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 
     public void submitContactModification() {
