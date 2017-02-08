@@ -4,9 +4,14 @@ import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import ru.models.ContactData;
+
+
+import java.util.ArrayList;
+import java.util.List;
 //import org.openqa.selenium.support.ui.Select;
 
 public class ContactHelper extends HelperBase{
@@ -83,4 +88,15 @@ public class ContactHelper extends HelperBase{
     }
 
 
+    //метод для получения списка контактов, состоящий из фамилий
+    public List<ContactData> getGroupList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements){
+            String lastname = element.findElements(By.tagName("td")).get(1).getText();
+            ContactData contact = new ContactData(null,null,lastname,null,null,null,null);
+            contacts.add(contact);
+        }
+        return contacts;
+    }
 }
