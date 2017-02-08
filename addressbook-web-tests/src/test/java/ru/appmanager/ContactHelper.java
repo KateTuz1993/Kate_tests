@@ -89,12 +89,14 @@ public class ContactHelper extends HelperBase{
 
 
     //метод для получения списка контактов, состоящий из фамилий
-    public List<ContactData> getGroupList() {
+    public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements){
             String lastname = element.findElements(By.tagName("td")).get(1).getText();
-            ContactData contact = new ContactData(null,null,lastname,null,null,null,null);
+            String firstname = element.findElements(By.tagName("td")).get(2).getText();
+            String address = element.findElements(By.tagName("td")).get(3).getText();
+            ContactData contact = new ContactData(firstname,null,lastname,null,address,null,null);
             contacts.add(contact);
         }
         return contacts;

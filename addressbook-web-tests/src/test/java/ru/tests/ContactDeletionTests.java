@@ -17,15 +17,16 @@ public class ContactDeletionTests extends TestBase{
             app.getNafigationHelper().gotoAddContactPage();
             app.getContactHelper().createContact(new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1"), true);
         }
-        List<ContactData> before = app.getContactHelper().getGroupList();
-        //int before = app.getContactHelper().getContactCount();
+        List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size()-1); //выбераем последний контакт
         app.getContactHelper().deleteSelectedContacts();
         app.getContactHelper().acceptContactDeletion();
         app.getNafigationHelper().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getGroupList();
-        //int after = app.getContactHelper().getContactCount();
+        List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(),before.size()-1);
+
+        before.remove(before.size()-1); //удаляем последний элемент из списка - нужно для сравнения списков
+        Assert.assertEquals(before,after); // сравниваем списки целиком
 
     }
 

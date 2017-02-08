@@ -16,15 +16,13 @@ public class ContactModificationTests extends TestBase{
             app.getNafigationHelper().gotoAddContactPage();
             app.getContactHelper().createContact(new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1"),true);
         }
-        List<ContactData> before = app.getContactHelper().getGroupList();
-        //int before = app.getContactHelper().getContactCount();
+        List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().initContactModify(before.size()-1); //выбераем последний контакт
         app.getContactHelper().fillContactForm(new ContactData("Nikita2", "Valerievich2", "Baliassniy2", "Home2", "nikita.baliassniy@gmail.com", "+79787397913", null), false);
         app.getContactHelper().submitContactModification();
         app.getContactHelper().returnToHomePageFromModify();
-        List<ContactData> after = app.getContactHelper().getGroupList();
-        //int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(after.size(),before.size());
+        List<ContactData> after = app.getContactHelper().getContactList();
+         Assert.assertEquals(after.size(),before.size());
     }
 
 
