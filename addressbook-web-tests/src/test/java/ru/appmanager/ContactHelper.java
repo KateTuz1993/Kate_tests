@@ -58,7 +58,7 @@ public class ContactHelper extends HelperBase{
     }
 
     public void initContactModify(int index) {
-        wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElements(By.tagName("a")).get(0).findElements(By.tagName("img")).get(0).click();  //выбор элемента по инедксу
+        wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).findElement(By.tagName("img")).click();  //выбор элемента по инедксу
         //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 
@@ -93,10 +93,17 @@ public class ContactHelper extends HelperBase{
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements){
+
+
+            String id = element.findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).getAttribute("href").substring(12);  //получаем id карандашика
+
+
+
+
             String lastname = element.findElements(By.tagName("td")).get(1).getText();
             String firstname = element.findElements(By.tagName("td")).get(2).getText();
             String address = element.findElements(By.tagName("td")).get(3).getText();
-            ContactData contact = new ContactData(firstname,null,lastname,null,address,null,null);
+            ContactData contact = new ContactData(id, firstname,null,lastname,null,address,null,null);
             contacts.add(contact);
         }
         return contacts;

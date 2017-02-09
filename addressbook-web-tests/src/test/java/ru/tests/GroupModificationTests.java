@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.models.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase
@@ -19,14 +20,21 @@ public class GroupModificationTests extends TestBase
         }
         List<GroupData> before = app.getGroupHelper().getGroupList();
         //int before = app.getGroupHelper().getGroupCount();
-        app.getGroupHelper().selectGroup(before.size()-1);
+        app.getGroupHelper().selectGroup(before.size()-1); //выбираем последнюю группу для модификации
         app.getGroupHelper().initGroupModification();
-        app.getGroupHelper().fillGroupForm(new GroupData("test1", "test5", "test6"));
+        //в этой структуре получаем id последней группы в списке
+        GroupData group = new GroupData(before.get(before.size()-1).getId(),"test1", "test5", "test6");
+        app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitGroupModification();
         app.getGroupHelper().returnToGroupPage();
         List<GroupData> after = app.getGroupHelper().getGroupList();
         //int after = app.getGroupHelper().getGroupCount();
         Assert.assertEquals(after.size(),before.size());
+
+        //сравнение множеств групп до и после модификации
+        before.remove(before.size()-1); //изменяем список групп: удаляем модифицируемую и добавляем ее же с новыми значениями
+        before.add(group);
+        Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));
 
     }
 
