@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.models.ContactData;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -30,7 +31,13 @@ public class ContactModificationTests extends TestBase{
         //сравнение множеств контактов до и после модификации
         before.remove(before.size()-1); //изменяем список контактов: удаляем модифицируемый и добавляем его же с новыми значениями
         before.add(contact);
-        Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));
+        Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
+        before.sort(byId);
+        after.sort(byId);
+
+
+        //Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after)); //сравнение множеств контактов на странице
+        Assert.assertEquals(before , after); //сравнение списков контактов на странице
     }
 
 

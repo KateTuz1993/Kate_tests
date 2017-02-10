@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.models.GroupData;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -34,7 +35,12 @@ public class GroupModificationTests extends TestBase
         //сравнение множеств групп до и после модификации
         before.remove(before.size()-1); //изменяем список групп: удаляем модифицируемую и добавляем ее же с новыми значениями
         before.add(group);
-        Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));
+        //сортировка списков, чтобы сравнивать не множества, а список
+        Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
+        before.sort(byId);
+        after.sort(byId);
+        //Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after)); // сравнение множеств
+        Assert.assertEquals(before ,after); // сравнение списков
 
     }
 
