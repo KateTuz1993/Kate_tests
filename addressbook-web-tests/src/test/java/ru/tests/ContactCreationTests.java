@@ -8,6 +8,7 @@ import ru.models.ContactData;
 import ru.models.GroupData;
 
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -29,15 +30,9 @@ public class ContactCreationTests extends TestBase{
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(),before.size() + 1); //сравниваем кол-во групп до начала теста добавления - и после
 
-
-        //отыскиваем id добавленной группы: как самый максимальный в списке
-        int max = 0;
-        for (ContactData g: after){
-            if (g.getId() > max)
-                max = g.getId();
-        }
-        contact.setId(max);
-
+        //отыскиваем id добавленного контакта: как самый максимальный в списке
+        // лямбда выражение - сравниватель id объектов типа ContactData
+        contact.setId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
         before.add(contact);
         //сравнение множеств групп до и после добавления
         Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));
