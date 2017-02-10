@@ -23,8 +23,13 @@ public class  GroupCreationTests extends TestBase{
         // лямбда выражение - сравниватель id объектов типа GroupData
         group.setId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
         before.add(group);
-        //сравнение множеств групп до и после добавления
-        Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));
+        //сортировка списков, чтобы сравнивать не множества, а список
+        Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
+        before.sort(byId);
+        after.sort(byId);
+
+        //Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));//сравнение множеств групп до и после добавления
+        Assert.assertEquals(before ,after);//сравнение множеств групп до и после добавления
     }
 
 }

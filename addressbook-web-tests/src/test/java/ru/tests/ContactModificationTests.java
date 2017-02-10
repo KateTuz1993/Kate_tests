@@ -31,6 +31,7 @@ public class ContactModificationTests extends TestBase{
         //сравнение множеств контактов до и после модификации
         before.remove(before.size()-1); //изменяем список контактов: удаляем модифицируемый и добавляем его же с новыми значениями
         before.add(contact);
+        //сортировка списков по Id
         Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
         before.sort(byId);
         after.sort(byId);

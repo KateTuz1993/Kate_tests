@@ -34,8 +34,13 @@ public class ContactCreationTests extends TestBase{
         // лямбда выражение - сравниватель id объектов типа ContactData
         contact.setId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
         before.add(contact);
-        //сравнение множеств групп до и после добавления
-        Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));
+        //сортировка списков по Id
+        Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
+        before.sort(byId);
+        after.sort(byId);
+
+        //Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));//сравнение множеств групп до и после добавления
+        Assert.assertEquals(before ,after);//сравнение множеств групп до и после добавления
     }
 
 }
