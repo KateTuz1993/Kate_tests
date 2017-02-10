@@ -73,7 +73,7 @@ public class GroupHelper extends HelperBase{
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
             String name = element.getText();
-            String id = element.findElement(By.tagName("input")).getAttribute("value");//получаем id чекбокса
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));//получаем id чекбокса, преобразованный в число
             GroupData group = new GroupData(id, name,null,null);
             groups.add(group);
         }
