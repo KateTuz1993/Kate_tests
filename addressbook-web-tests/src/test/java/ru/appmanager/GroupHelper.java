@@ -51,19 +51,25 @@ public class GroupHelper extends HelperBase{
         click(By.name("update"));
     }
 
-    public void createGroup(GroupData group) {
+    public void create(GroupData group) {
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
         returnToGroupPage();
     }
 
-    public void modifyGroup(int index, GroupData group) {
+    public void modify(int index, GroupData group) {
         selectGroup(index); //выбираем последнюю группу для модификации
         initGroupModification();
         //в этой структуре получаем id последней группы в списке
         fillGroupForm(group);
         submitGroupModification();
+        returnToGroupPage();
+    }
+
+    public void delete(int index) {
+        selectGroup(index);
+        deleteSeletedGroups();
         returnToGroupPage();
     }
 
@@ -77,7 +83,7 @@ public class GroupHelper extends HelperBase{
     }
 
     //метод для получения списка групп, состоящий из их названий
-    public List<GroupData> getGroupList() {
+    public List<GroupData> list() {
         List<GroupData> groups = new ArrayList<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){

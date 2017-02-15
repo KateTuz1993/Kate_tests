@@ -5,7 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.models.ContactData;
-import ru.models.GroupData;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class ContactDeletionTests extends TestBase{
         //проверка существует ли контакт для модификаци. если нет - то создаем его
 
         if(!app.getContactHelper().isThereAContact()){
-            app.getNafigationHelper().gotoAddContactPage();
+            app.goTo().gotoAddContactPage();
             app.getContactHelper().createContact(new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1"),true);
         }
     }
@@ -27,7 +26,7 @@ public class ContactDeletionTests extends TestBase{
         app.getContactHelper().selectContact(before.size()-1); //выбераем последний контакт
         app.getContactHelper().deleteSelectedContacts();
         app.getContactHelper().acceptContactDeletion();
-        app.getNafigationHelper().goToHomePage();
+        app.goTo().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(),before.size()-1);
 

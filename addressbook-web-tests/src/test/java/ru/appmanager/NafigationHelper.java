@@ -10,7 +10,7 @@ public class NafigationHelper extends HelperBase{
         super(wd);
     }
 //добавлены проверки: необходимо ли делать этот клик? можно не делать его, если мы уже находимся на нужной странице
-    public void gotoGroupPage() {
+    public void groupPage() {
        if (isElementPresent(By.tagName("h1")) //на странице присутствует заголовок
                && wd.findElement(By.tagName("h1")).getText().equals("Groups") //название заголовка Groups
                && isElementPresent(By.name("new"))){   // и присутствует элемент с названием New(кнопка)

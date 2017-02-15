@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import ru.models.ContactData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase{
@@ -16,7 +15,7 @@ public class ContactModificationTests extends TestBase{
         //проверка существует ли контакт для модификаци. если нет - то создаем его
 
         if(!app.getContactHelper().isThereAContact()){
-            app.getNafigationHelper().gotoAddContactPage();
+            app.goTo().gotoAddContactPage();
             app.getContactHelper().createContact(new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1"),true);
         }
     }
