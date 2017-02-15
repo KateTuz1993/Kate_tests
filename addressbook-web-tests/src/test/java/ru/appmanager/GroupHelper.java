@@ -58,6 +58,15 @@ public class GroupHelper extends HelperBase{
         returnToGroupPage();
     }
 
+    public void modifyGroup(int index, GroupData group) {
+        selectGroup(index); //выбираем последнюю группу для модификации
+        initGroupModification();
+        //в этой структуре получаем id последней группы в списке
+        fillGroupForm(group);
+        submitGroupModification();
+        returnToGroupPage();
+    }
+
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -79,4 +88,6 @@ public class GroupHelper extends HelperBase{
         }
         return groups;
     }
+
+
 }

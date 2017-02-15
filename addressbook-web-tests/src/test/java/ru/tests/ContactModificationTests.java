@@ -1,6 +1,7 @@
 package ru.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.models.ContactData;
 
@@ -10,14 +11,19 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase{
 
-    @Test //(enabled = false)
-    public void testContactModification(){
+    @BeforeMethod
+    public  void ensurePreconditions() { // проверка выполения предусловий
         //проверка существует ли контакт для модификаци. если нет - то создаем его
 
         if(!app.getContactHelper().isThereAContact()){
             app.getNafigationHelper().gotoAddContactPage();
             app.getContactHelper().createContact(new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1"),true);
         }
+    }
+
+    @Test //(enabled = false)
+    public void testContactModification(){
+
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().initContactModify(before.size()-1); //выбераем последний контакт
         //в этой структуре получаем id контакта, который модифицируем - т.е. последнего. остальные данный заполняем новыми значениями
