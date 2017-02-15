@@ -11,7 +11,9 @@ import ru.models.ContactData;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 //import org.openqa.selenium.support.ui.Select;
 
 public class ContactHelper extends HelperBase{
@@ -51,7 +53,12 @@ public class ContactHelper extends HelperBase{
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click(); //выбор элемента по инедксу
         //click(By.name("selected[]"));
-         }
+    }
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value = '"+ id +"']")).click(); //выбор элемента по id
+        //click(By.name("selected[]"));
+    }
+
 
     public void deleteSelectedContacts() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
@@ -60,6 +67,15 @@ public class ContactHelper extends HelperBase{
     public void initContactModify(int index) {
         wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).findElement(By.tagName("img")).click();  //выбор элемента по инедксу
         //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    public void initContactModifyById(int id) {
+        //wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr['" + id + "']/td[8]/a/img")).click();
+       
+        wd.findElement(By.cssSelector("a[href = edit.php?id='" + id + "']")).click();
+        //wd.findElement(By.tagName("td")).findElement(By.cssSelector("input[value='"+ id +"']")).click();
+        //wd.findElements(By.tagName("td")).get(7).findElement(By.cssSelector("a[href = http://localhost:8080/addressbook/edit.php?id='"+ id +"']")).click(); //выбор элемента по id
+        //wd.findElement(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).findElement(By.tagName("img")).click();  //выбор элемента по id
     }
 
     public void submitContactModification() {
@@ -79,8 +95,8 @@ public class ContactHelper extends HelperBase{
        returnToHomePage();
     }
 
-    public void modify(int index, ContactData contact) {
-        initContactModify(index); //выбераем последний контакт
+    public void modify(ContactData contact) {
+        initContactModifyById(contact.getId()); //выбираем любой контакт
         //в этой структуре получаем id контакта, который модифицируем - т.е. последнего. остальные данный заполняем новыми значениями
         fillContactForm(contact,false);
         submitContactModification();
@@ -91,7 +107,11 @@ public class ContactHelper extends HelperBase{
         selectContact(index); //выбираем последний контакт
         deleteSelectedContacts();
         acceptContactDeletion();
-
+    }
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId()); //выбираем последний контакт
+        deleteSelectedContacts();
+        acceptContactDeletion();
     }
 
     public boolean isThereAContact() {
@@ -111,8 +131,6 @@ public class ContactHelper extends HelperBase{
         for (WebElement element : elements){
             List<WebElement> tds = element.findElements(By.tagName("td")); // список элементов td  в строке
             int id = Integer.parseInt(tds.get(0).findElement(By.tagName("input")).getAttribute("value"));
-
-            //int id = Integer.parseInt(element.findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).getAttribute("href").substring(46));  //получаем id карандашика
             String lastname = tds.get(1).getText();
             String firstname = tds.get(2).getText();
             String address = tds.get(3).getText();
@@ -122,4 +140,24 @@ public class ContactHelper extends HelperBase{
         }
         return contacts;
     }
+
+    //метод для получения множества контактов, состоящий из фамилий
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+
+        for (WebElement element : elements){
+            List<WebElement> tds = element.findElements(By.tagName("td")); // список элементов td  в строке
+            int id = Integer.parseInt(tds.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            String lastname = tds.get(1).getText();
+            String firstname = tds.get(2).getText();
+            String address = tds.get(3).getText();
+            ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress(address);
+
+            contacts.add(contact);
+        }
+        return contacts;
+    }
+
+
 }

@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ru.models.ContactData;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactDeletionTests extends TestBase{
 
@@ -22,14 +23,14 @@ public class ContactDeletionTests extends TestBase{
 
     @Test //(enabled = false)
     public void testContactDeletion(){
-        List<ContactData> before = app.contact().list();
-        int index = before.size()-1; //индекс последнего контакта
-        app.contact().delete(index);
+        Set<ContactData> before = app.contact().all();
+        ContactData deletedContact = before.iterator().next(); //выбираем первый попавшийся контакт
+        app.contact().delete(deletedContact);
         app.goTo().goToHomePage(); //необходио для хрома
-        List<ContactData> after = app.contact().list();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(),before.size()-1);
 
-        before.remove(index); //удаляем последний элемент из списка - нужно для сравнения списков
+        before.remove(deletedContact); //удаляем последний элемент из списка - нужно для сравнения списков
         Assert.assertEquals(before,after); // сравниваем списки целиком
 
     }

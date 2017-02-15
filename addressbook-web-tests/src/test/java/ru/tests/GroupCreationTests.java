@@ -4,30 +4,23 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.models.GroupData;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class  GroupCreationTests extends TestBase{
 
     @Test
     public void  testGroupCreation() {
         app.goTo().groupPage();
-        List<GroupData> before = app.group().list();
+        Set<GroupData> before = app.group().all();
         GroupData group = new GroupData().withName("test2").withHeader("test3").withFooter("test4");
         app.group().create(group);
-        List<GroupData> after = app.group().list();
+        Set<GroupData> after = app.group().all();
         Assert.assertEquals(after.size(),before.size() + 1);
 
         //отыскиваем id добавленной группы: как самый максимальный в списке
         // лямбда выражение - сравниватель id объектов типа GroupData
-        group.withId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
+        group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()); //преобразуем объект в число и находим максимальный
         before.add(group);
-        //сортировка списков, чтобы сравнивать не множества, а список
-        Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
-        before.sort(byId);
-        after.sort(byId);
-
-        //Assert.assertEquals(new HashSet<Object>(before) ,new HashSet<Object>(after));//сравнение множеств групп до и после добавления
         Assert.assertEquals(before ,after);//сравнение множеств групп до и после добавления
     }
 

@@ -3,11 +3,11 @@ package ru.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.models.GroupData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase{
 
@@ -38,9 +38,9 @@ public class GroupHelper extends HelperBase{
         click(By.name("delete"));
     }
 
-    public void selectGroup(int index) {
-       wd.findElements(By.name("selected[]")).get(index).click(); //выбор элемента по инедксу
 
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value = '"+ id +"']")).click(); //выбор элемента по id
     }
 
     public void initGroupModification() {
@@ -58,8 +58,8 @@ public class GroupHelper extends HelperBase{
         returnToGroupPage();
     }
 
-    public void modify(int index, GroupData group) {
-        selectGroup(index); //выбираем последнюю группу для модификации
+    public void modify(GroupData group) {
+        selectGroupById(group.getId()); //выбираем последнюю группу для модификации
         initGroupModification();
         //в этой структуре получаем id последней группы в списке
         fillGroupForm(group);
@@ -67,8 +67,9 @@ public class GroupHelper extends HelperBase{
         returnToGroupPage();
     }
 
-    public void delete(int index) {
-        selectGroup(index);
+
+    public void delete(GroupData group) {
+        selectGroupById(group.getId());
         deleteSeletedGroups();
         returnToGroupPage();
     }
@@ -82,9 +83,10 @@ public class GroupHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    //метод для получения списка групп, состоящий из их названий
-    public List<GroupData> list() {
-        List<GroupData> groups = new ArrayList<GroupData>();
+
+    //метод для получения множества групп, состоящий из их названий
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
             String name = element.getText();
@@ -94,6 +96,5 @@ public class GroupHelper extends HelperBase{
         }
         return groups;
     }
-
 
 }
