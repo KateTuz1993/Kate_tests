@@ -72,11 +72,26 @@ public class ContactHelper extends HelperBase{
 
     public void acceptContactDeletion() { wd.switchTo().alert().accept();    }
 
-    public void createContact(ContactData contact, boolean creation) {
+    public void create(ContactData contact, boolean creation) {
 
        fillContactForm(contact, creation);
        enteringContactInfo();
        returnToHomePage();
+    }
+
+    public void modify(int index, ContactData contact) {
+        initContactModify(index); //выбераем последний контакт
+        //в этой структуре получаем id контакта, который модифицируем - т.е. последнего. остальные данный заполняем новыми значениями
+        fillContactForm(contact,false);
+        submitContactModification();
+        returnToHomePageFromModify();
+    }
+
+    public void delete(int index) {
+        selectContact(index); //выбираем последний контакт
+        deleteSelectedContacts();
+        acceptContactDeletion();
+
     }
 
     public boolean isThereAContact() {
@@ -89,7 +104,7 @@ public class ContactHelper extends HelperBase{
 
 
     //метод для получения списка контактов, состоящий из фамилий
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 

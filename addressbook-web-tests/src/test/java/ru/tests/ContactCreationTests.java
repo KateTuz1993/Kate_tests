@@ -14,7 +14,7 @@ public class ContactCreationTests extends TestBase{
 
     @Test //(enabled = false)
     public void testContactCreation() {
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
         //проверка есть ли хоть одна группа? если нет, сначала создаем ее
         app.goTo().groupPage();
         if (! app.group().isThereAGroup()){
@@ -22,10 +22,10 @@ public class ContactCreationTests extends TestBase{
             app.group().create(new GroupData("test1", "test2", "test3"));
         }
         app.goTo().goToHomePage();
-        app.goTo().gotoAddContactPage();
+        app.goTo().addContactPage();
         ContactData contact = new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1");
-        app.getContactHelper().createContact(contact,true);
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().create(contact,true);
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(),before.size() + 1); //сравниваем кол-во групп до начала теста добавления - и после
 
         //отыскиваем id добавленного контакта: как самый максимальный в списке

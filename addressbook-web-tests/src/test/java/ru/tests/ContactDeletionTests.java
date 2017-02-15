@@ -14,25 +14,26 @@ public class ContactDeletionTests extends TestBase{
     public  void ensurePreconditions() { // проверка выполения предусловий
         //проверка существует ли контакт для модификаци. если нет - то создаем его
 
-        if(!app.getContactHelper().isThereAContact()){
-            app.goTo().gotoAddContactPage();
-            app.getContactHelper().createContact(new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1"),true);
+        if(!app.contact().isThereAContact()){
+            app.goTo().addContactPage();
+            app.contact().create(new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1"),true);
         }
     }
 
     @Test //(enabled = false)
     public void testContactDeletion(){
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size()-1); //выбераем последний контакт
-        app.getContactHelper().deleteSelectedContacts();
-        app.getContactHelper().acceptContactDeletion();
-        app.goTo().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
+        int index = before.size()-1; //индекс последнего контакта
+        app.contact().delete(index);
+        app.goTo().goToHomePage(); //необходио для хрома
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(),before.size()-1);
 
-        before.remove(before.size()-1); //удаляем последний элемент из списка - нужно для сравнения списков
+        before.remove(index); //удаляем последний элемент из списка - нужно для сравнения списков
         Assert.assertEquals(before,after); // сравниваем списки целиком
 
     }
+
+
 
 }

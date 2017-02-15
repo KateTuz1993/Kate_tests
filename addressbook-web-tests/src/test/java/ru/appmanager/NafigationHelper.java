@@ -19,7 +19,7 @@ public class NafigationHelper extends HelperBase{
        click(By.linkText("groups"));
     }
 
-    public void gotoAddContactPage() {
+    public void addContactPage() {
 
         if (isElementPresent(By.tagName("h1"))  //на странице присутствует заголовок
                 && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry") ){ //название заголовка Edit ...
