@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase{
 
-    @Test
+    @Test //(enabled = false)
     public void testContactCreation() {
         List<ContactData> before = app.getContactHelper().getContactList();
         //проверка есть ли хоть одна группа? если нет, сначала создаем ее
