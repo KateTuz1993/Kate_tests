@@ -3,70 +3,74 @@ package ru.models;
 public class ContactData {
 
 
-    private int id;
-    private final String firstname;
-    private final String middlename;
-    private final String lastname;
-    private final String company;
-    private final String address;
-    private final String home_tel;
+    private int id = Integer.MAX_VALUE; //чтобы создаваемый контакт был всегда последним;
+    private String firstname;
+    private String middlename;
+    private String lastname;
+    private String company;
+    private String address;
+    private String home_tel;
     private String group;
 
-    //искуственно созданная структура (без id)
-    public ContactData(String firstname, String middlename, String lastname, String company, String address, String home_tel, String group) {
-        this.id = Integer.MAX_VALUE; //чтобы создаваемый контакт был всегда последним
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.company = company;
-        this.address = address;
-        this.home_tel = home_tel;
-        this.group = group;
-    }
-
-    //в этой структуре получен id с web странички
-    public ContactData(int id,String firstname, String middlename, String lastname, String company, String address, String home_tel, String group) {
-        this.id = id;
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.company = company;
-        this.address = address;
-        this.home_tel = home_tel;
-        this.group = group;
-    }
-
+    //геттеры
     public int getId() { return id;    }
-
     public String getFirstname() {
         return firstname;
     }
-
     public String getMiddlename() {
         return middlename;
     }
-
     public String getLastname() {
         return lastname;
     }
-
     public String getCompany() {
         return company;
     }
-
     public String getAddress() {
         return address;
     }
-
     public String getHome_tel() {
         return home_tel;
     }
-
     public String getGroup() {
         return group;
     }
 
-    public void setId(int id) {    this.id = id;   }
+    //сеттеры
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
+    }
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+    public ContactData withMiddlename(String middlename) {
+        this.middlename = middlename;
+        return this;
+    }
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+    public ContactData withHome_tel(String home_tel) {
+        this.home_tel = home_tel;
+        return this;
+    }
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+
+    }
+
 
     @Override
     public String toString() {

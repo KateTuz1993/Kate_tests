@@ -19,18 +19,18 @@ public class ContactCreationTests extends TestBase{
         app.goTo().groupPage();
         if (! app.group().isThereAGroup()){
             //app.goTo().groupPage();
-            app.group().create(new GroupData("test1", "test2", "test3"));
+            app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
         }
         app.goTo().goToHomePage();
         app.goTo().addContactPage();
-        ContactData contact = new ContactData("Nikita", "Valerievich", "Baliassniy", "Home", "nikita.baliassniy@gmail.com", "+79787397913", "test1");
+        ContactData contact = new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("nikita.baliassniy@gmail.com").withHome_tel("+79787397913").withGroup("test1");
         app.contact().create(contact,true);
         List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(),before.size() + 1); //сравниваем кол-во групп до начала теста добавления - и после
 
         //отыскиваем id добавленного контакта: как самый максимальный в списке
         // лямбда выражение - сравниватель id объектов типа ContactData
-        contact.setId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
+        contact.withId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
         before.add(contact);
         //сортировка списков по Id
         Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);

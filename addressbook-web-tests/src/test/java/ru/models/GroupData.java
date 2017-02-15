@@ -1,27 +1,40 @@
 package ru.models;
 
 public class GroupData {
-    private int id;
-    private final String name;
-    private final String header;
-    private final String footer;
+    private int id = Integer.MAX_VALUE;
+    private String name;
+    private String header;
+    private String footer;
 
-    //констуктор, который генеируем сами (отсутствует id для чекбокса)
-    public GroupData( String name, String header, String footer) {
-        this.id = Integer.MAX_VALUE; //чтобы создаваемая группа была всегда последней
-        this.name = name;
-        this.header = header;
-        this.footer = footer;
-    }
-    //конструктор получаемых данных с web странички
-    public GroupData(int id, String name, String header, String footer) {
+    //сеттеры для атрибутов
+    public GroupData withId(int id) {
         this.id = id;
+        return this;
+    }
+    public GroupData withName(String name) {
         this.name = name;
+        return this;  //для реализации каскадных вызовов
+    }
+    public GroupData withHeader(String header) {
         this.header = header;
+        return this;
+    }
+    public GroupData withFooter(String footer) {
         this.footer = footer;
+        return this;
     }
 
-
+    //геттеры
+    public int getId() { return id;    }
+    public String getName() {
+        return name;
+    }
+    public String getHeader() {
+        return header;
+    }
+    public String getFooter() {
+        return footer;
+    }
 
     @Override
     public String toString() {
@@ -29,22 +42,6 @@ public class GroupData {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
-    }
-
-    public int getId() { return id;    } //геттер
-    public void setId(int id) { this.id = id;  } //сеттер
-
-
-    public String getName() {
-        return name;
-    }
-
-    public String getHeader() {
-        return header;
-    }
-
-    public String getFooter() {
-        return footer;
     }
 
     @Override
