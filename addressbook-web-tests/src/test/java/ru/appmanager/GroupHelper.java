@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.models.GroupData;
+import ru.models.Groups;
 
 import java.util.HashSet;
 import java.util.List;
@@ -85,14 +86,13 @@ public class GroupHelper extends HelperBase{
 
 
     //метод для получения множества групп, состоящий из их названий
-    public Set<GroupData> all() {
-        Set<GroupData> groups = new HashSet<GroupData>();
+    public Groups all() {
+        Groups groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));//получаем id чекбокса, преобразованный в число
-            GroupData group = new GroupData().withId(id).withName(name);
-            groups.add(group);
+            groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
     }

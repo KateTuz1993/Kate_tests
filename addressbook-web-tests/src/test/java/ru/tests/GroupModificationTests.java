@@ -1,9 +1,12 @@
 package ru.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.models.GroupData;
+import ru.models.Groups;
 
 import java.util.Set;
 
@@ -22,19 +25,17 @@ public class GroupModificationTests extends TestBase
 
     public void testGroupModification(){
 
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData modifiedGroup = before.iterator().next(); //первый попавшийся элемент множетсва
         //int index = before.size()-1; // индекс последней группы
         GroupData group = new GroupData()
                 .withId(modifiedGroup.getId()).withName("test2").withHeader("test3").withFooter("test4");
         app.group().modify(group);
-        Set<GroupData> after = app.group().all();
+        Groups after = app.group().all();
         Assert.assertEquals(after.size(),before.size());
 
         //сравнение множеств групп до и после модификации
-        before.remove(modifiedGroup); //изменяем список групп: удаляем модифицируемую и добавляем ее же с новыми значениями
-        before.add(group);
-        Assert.assertEquals(before ,after); // сравнение списков
+        MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(modifiedGroup).withAdded(group)));
 
     }
 

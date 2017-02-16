@@ -1,11 +1,17 @@
 package ru.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.models.GroupData;
+import ru.models.Groups;
 
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class  GroupDeletionTests extends TestBase{
 
@@ -21,15 +27,13 @@ public class  GroupDeletionTests extends TestBase{
     @Test
     public void testgroupDeletion() {
 
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData deletedGroup = before.iterator().next(); //первый попавшийся элемент множетсва
-        //int index  = before.size()-1; //индекс последней группы
         app.group().delete(deletedGroup);
-        Set<GroupData> after = app.group().all();
+        Groups after = app.group().all();
         Assert.assertEquals(after.size(),before.size()-1);
 
-        before.remove(deletedGroup); //удаляем последний элемент из списка - нужно для сравнения списков
-        Assert.assertEquals(before,after); // сравниваем списки целиком
+       assertThat(after, equalTo(before.without(deletedGroup)));
 
 
     }
