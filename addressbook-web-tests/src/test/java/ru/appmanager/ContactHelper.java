@@ -2,7 +2,6 @@ package ru.appmanager;
 
 import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -64,18 +63,9 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
-    public void initContactModify(int index) {
-        wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).findElement(By.tagName("img")).click();  //выбор элемента по инедксу
-        //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-    }
-
     public void initContactModifyById(int id) {
-        //wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr['" + id + "']/td[8]/a/img")).click();
-       
-        wd.findElement(By.cssSelector("a[href = edit.php?id='" + id + "']")).click();
-        //wd.findElement(By.tagName("td")).findElement(By.cssSelector("input[value='"+ id +"']")).click();
-        //wd.findElements(By.tagName("td")).get(7).findElement(By.cssSelector("a[href = http://localhost:8080/addressbook/edit.php?id='"+ id +"']")).click(); //выбор элемента по id
-        //wd.findElement(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).findElement(By.tagName("img")).click();  //выбор элемента по id
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click(); //выбор элемента по id
+        //wd.findElement(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).findElement(By.tagName("img")).click();  //выбор элемента по индексу
     }
 
     public void submitContactModification() {
@@ -103,11 +93,6 @@ public class ContactHelper extends HelperBase{
         returnToHomePageFromModify();
     }
 
-    public void delete(int index) {
-        selectContact(index); //выбираем последний контакт
-        deleteSelectedContacts();
-        acceptContactDeletion();
-    }
     public void delete(ContactData contact) {
         selectContactById(contact.getId()); //выбираем последний контакт
         deleteSelectedContacts();
@@ -122,24 +107,6 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-
-    //метод для получения списка контактов, состоящий из фамилий
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.name("entry"));
-
-        for (WebElement element : elements){
-            List<WebElement> tds = element.findElements(By.tagName("td")); // список элементов td  в строке
-            int id = Integer.parseInt(tds.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            String lastname = tds.get(1).getText();
-            String firstname = tds.get(2).getText();
-            String address = tds.get(3).getText();
-            ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress(address);
-
-            contacts.add(contact);
-        }
-        return contacts;
-    }
 
     //метод для получения множества контактов, состоящий из фамилий
     public Set<ContactData> all() {

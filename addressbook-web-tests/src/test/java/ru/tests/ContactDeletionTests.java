@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.models.ContactData;
 
-import java.util.List;
+
 import java.util.Set;
 
 public class ContactDeletionTests extends TestBase{
@@ -15,7 +15,7 @@ public class ContactDeletionTests extends TestBase{
     public  void ensurePreconditions() { // проверка выполения предусловий
         //проверка существует ли контакт для модификаци. если нет - то создаем его
 
-        if(!app.contact().isThereAContact()){
+        if(app.contact().all().size()==0){
             app.goTo().addContactPage();
             app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("nikita.baliassniy@gmail.com").withHome_tel("+79787397913").withGroup("test1"),true);
         }

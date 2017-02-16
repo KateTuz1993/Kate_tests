@@ -6,9 +6,6 @@ import org.testng.annotations.Test;
 import ru.models.ContactData;
 import ru.models.GroupData;
 
-
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 public class ContactCreationTests extends TestBase{
@@ -18,7 +15,7 @@ public class ContactCreationTests extends TestBase{
         Set<ContactData> before = app.contact().all();
         //проверка есть ли хоть одна группа? если нет, сначала создаем ее
         app.goTo().groupPage();
-        if (! app.group().isThereAGroup()){
+        if (app.group().all().size()==0){
             //app.goTo().groupPage();
             app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
         }
