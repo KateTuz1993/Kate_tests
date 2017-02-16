@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import ru.models.ContactData;
+import ru.models.Contacts;
 
 
 import java.util.ArrayList;
@@ -49,10 +50,6 @@ public class ContactHelper extends HelperBase{
     }
 
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click(); //выбор элемента по инедксу
-        //click(By.name("selected[]"));
-    }
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value = '"+ id +"']")).click(); //выбор элемента по id
         //click(By.name("selected[]"));
@@ -109,8 +106,8 @@ public class ContactHelper extends HelperBase{
 
 
     //метод для получения множества контактов, состоящий из фамилий
-    public Set<ContactData> all() {
-        Set<ContactData> contacts = new HashSet<ContactData>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
         for (WebElement element : elements){
