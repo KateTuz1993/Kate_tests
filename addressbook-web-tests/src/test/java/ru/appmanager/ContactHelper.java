@@ -79,6 +79,7 @@ public class ContactHelper extends HelperBase{
 
        fillContactForm(contact, creation);
        enteringContactInfo();
+       contactCache = null; //обнуляем кеш
        returnToHomePage();
     }
 
@@ -87,6 +88,7 @@ public class ContactHelper extends HelperBase{
         //в этой структуре получаем id контакта, который модифицируем - т.е. последнего. остальные данный заполняем новыми значениями
         fillContactForm(contact,false);
         submitContactModification();
+        contactCache = null; //обнуляем кеш
         returnToHomePageFromModify();
     }
 
@@ -94,6 +96,7 @@ public class ContactHelper extends HelperBase{
         selectContactById(contact.getId()); //выбираем последний контакт
         deleteSelectedContacts();
         acceptContactDeletion();
+        contactCache = null; //обнуляем кеш
     }
 
     public boolean isThereAContact() {
@@ -105,9 +108,14 @@ public class ContactHelper extends HelperBase{
     }
 
 
+    private Contacts contactCache = null; //кеш
+
     //метод для получения множества контактов, состоящий из фамилий
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null){
+            return new Contacts(contactCache); // возвращаем копию кеша
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
         for (WebElement element : elements){
@@ -118,9 +126,9 @@ public class ContactHelper extends HelperBase{
             String address = tds.get(3).getText();
             ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress(address);
 
-            contacts.add(contact);
+            contactCache.add(contact);
         }
-        return contacts;
+        return contactCache;
     }
 
 

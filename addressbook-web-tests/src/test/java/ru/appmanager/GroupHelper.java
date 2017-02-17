@@ -56,6 +56,7 @@ public class GroupHelper extends HelperBase{
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
+        groupCache = null; //обнуляем кеш
         returnToGroupPage();
     }
 
@@ -65,6 +66,7 @@ public class GroupHelper extends HelperBase{
         //в этой структуре получаем id последней группы в списке
         fillGroupForm(group);
         submitGroupModification();
+        groupCache = null; //обнуляем кеш
         returnToGroupPage();
     }
 
@@ -72,6 +74,7 @@ public class GroupHelper extends HelperBase{
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deleteSeletedGroups();
+        groupCache = null; //обнуляем кеш
         returnToGroupPage();
     }
 
@@ -85,16 +88,22 @@ public class GroupHelper extends HelperBase{
     }
 
 
+    private Groups groupCache = null; //кеш
+
+
     //метод для получения множества групп, состоящий из их названий
     public Groups all() {
-        Groups groups = new Groups();
+        if (groupCache!=null){
+            return new Groups(groupCache); // возвращаем копию кеша
+        }
+        groupCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));//получаем id чекбокса, преобразованный в число
-            groups.add(new GroupData().withId(id).withName(name));
+            groupCache.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        return groupCache;
     }
 
 }
