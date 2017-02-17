@@ -33,8 +33,8 @@ public class ContactDeletionTests extends TestBase{
         ContactData deletedContact = before.iterator().next(); //выбираем первый попавшийся контакт
         app.contact().delete(deletedContact);
         app.goTo().goToHomePage(); //необходио для хрома
+        assertThat(app.contact().count(),equalTo(before.size()-1));// хешированная проверка
         Contacts after = app.contact().all();
-        assertThat(after.size(),equalTo(before.size()-1));
 
         before.remove(deletedContact); //удаляем последний элемент из списка - нужно для сравнения списков
         assertThat(after, equalTo(before.without(deletedContact)));

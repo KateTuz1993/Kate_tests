@@ -1,13 +1,8 @@
 package ru.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.models.GroupData;
 import ru.models.Groups;
-
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,12 +15,16 @@ public class  GroupCreationTests extends TestBase{
         Groups before = app.group().all();
         GroupData group = new GroupData().withName("test1").withHeader("test2").withFooter("test3");
         app.group().create(group);
+        assertThat(app.group().сount(),equalTo(before.size() + 1)); //хешированная проверка
         Groups after = app.group().all();
-        assertThat(after.size(),equalTo(before.size() + 1));
+
         // сравнение множеств групп до и после добавления
         assertThat(after, equalTo(
-                before.withAdded(group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
+               before.withAdded(group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
 
     }
+
+
+
 
 }

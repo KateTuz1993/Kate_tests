@@ -31,6 +31,7 @@ public class ContactModificationTests extends TestBase{
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next(); //выбираем первый попавшийся контакт
         int index = before.size()-1;
+        assertThat(app.contact().count(),equalTo(before.size()));// хешированная проверка
         ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Nikita2").withMiddlename("Valerievich2").withLastname("Baliassniy2").withCompany("Home").withAddress("nikita.baliassniy@gmail.com").withHome_tel("+79787397913");
 
         app.contact().modify(contact);
