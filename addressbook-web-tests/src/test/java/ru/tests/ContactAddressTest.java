@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.*;
 
 
-public class ContactPhoneTests extends TestBase{
+public class ContactAddressTest extends TestBase{
 
     @BeforeMethod
     public  void ensurePreconditions() { // проверка выполения предусловий
@@ -22,30 +22,29 @@ public class ContactPhoneTests extends TestBase{
 
         if(app.contact().all().size()==0){
             app.goTo().addContactPage();
-            app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97, 61").withHome_tel("+79787397913").withGroup("test2"),true);
+            app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97,61").withHome_tel("+79787397913").withEmail("nikita.balliassniy@gmail.com").withGroup("test2"),true);
         }
     }
 
     @Test
-    public void testContactPhones(){
+    public void testAddressPhones(){
         app.goTo().goToHomePage();
         ContactData contact = app.contact().all().iterator().next(); //получаем список (множество) контактов и выбираем первый попавшийся
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-
-        MatcherAssert.assertThat(contact.getAllPhones(),equalTo(mergePhones(contactInfoFromEditForm)));
+        MatcherAssert.assertThat(contact.getAddress().trim(),equalTo(mergeAddress(contactInfoFromEditForm)));
 
 
     }
 
-    private String mergePhones(ContactData contact) { //клеим строки
-        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()) //список телефонов
-        .stream().filter((s)->!s.equals(""))
-                .map(ContactPhoneTests::cleaned)
+    private String mergeAddress(ContactData contact) { //клеим строки
+        return Arrays.asList(contact.getAddress())
+                .stream().filter((s)->!s.equals(""))
+                .map(ContactAddressTest::cleaned)
                 .collect(Collectors.joining("\n"));
 
     }
-    public static String cleaned(String phone){
-        return phone.replaceAll("\\s","").replaceAll("[-()]",""); //убираем в телефонах все символы пробелов, табуляций, дефисов, скобок
+    public static String cleaned(String address){
+        return address.replaceAll("[-()]",""); //убираем в адресе все символы пробелов, табуляций, дефисов, скобок
     }
 }
