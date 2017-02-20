@@ -20,11 +20,10 @@ public class ContactData {
     private String email3;
     private String allEmails;
 
+
     //геттеры
     public int getId() { return id;    }
-    public String getFirstname() {
-        return firstname;
-    }
+    public String getFirstname() {   return firstname;   }
     public String getMiddlename() {
         return middlename;
     }
@@ -34,10 +33,7 @@ public class ContactData {
     public String getCompany() {
         return company;
     }
-    public String getAddress() {
-        return address;
-    }
-
+    public String getAddress() {    return address;  }
     public String getGroup() {   return group;    }
     public String getHomePhone() {   return homePhone;    }
     public String getMobilePhone() {   return mobilePhone;    }
@@ -47,6 +43,7 @@ public class ContactData {
     public String getEmail3() {   return email3;    }
     public String getAllPhones() {    return allPhones;   }
     public String getAllEmails() {    return allEmails;   }
+   // public String getContactContent() {    return content;   }
 
 
     //сеттеры
@@ -118,6 +115,7 @@ public class ContactData {
         this.allEmails = allEmails;
         return this;
     }
+
 
 
 

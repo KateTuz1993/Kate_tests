@@ -27,7 +27,7 @@ public class ContactAddressTest extends TestBase{
     }
 
     @Test
-    public void testAddressPhones(){
+    public void testAddress(){
         app.goTo().goToHomePage();
         ContactData contact = app.contact().all().iterator().next(); //получаем список (множество) контактов и выбираем первый попавшийся
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);

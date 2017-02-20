@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import ru.models.ContactData;
 import ru.models.Contacts;
-
+import javax.swing.JOptionPane;
 
 import java.util.*;
 //import org.openqa.selenium.support.ui.Select;
@@ -34,7 +34,16 @@ public class ContactHelper extends HelperBase{
         type(By.name("lastname"),contactData.getLastname());
         type(By.name("company"),contactData.getCompany());
         type(By.name("address"),contactData.getAddress());
+ //       type(By.name("home"),contactData.getHomePhone());
+
         type(By.name("home"),contactData.getHomePhone());
+        type(By.name("mobile"),contactData.getMobilePhone());
+        type(By.name("work"),contactData.getWorkPhone());
+        type(By.name("email"),contactData.getEmail());
+        type(By.name("email2"),contactData.getEmail2());
+        type(By.name("email3"),contactData.getEmail3());
+
+
 
         if (creation){ //если это форма для создания нового контакта
             new org.openqa.selenium.support.ui.Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -61,6 +70,9 @@ public class ContactHelper extends HelperBase{
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click(); //выбор элемента по id
         //wd.findElement(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).findElement(By.tagName("img")).click();  //выбор элемента по индексу
     }
+    public void initContactViewById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click(); //выбор элемента по id - нажатие на человечка
+    }
 
     public void submitContactModification() {
         click(By.xpath("//div[@id='content']/form[1]/input[22]"));
@@ -76,8 +88,9 @@ public class ContactHelper extends HelperBase{
 
        fillContactForm(contact, creation);
        enteringContactInfo();
-       contactCache = null; //обнуляем кеш
+
        returnToHomePage();
+        contactCache = null; //обнуляем кеш
     }
 
     public void modify(ContactData contact) {
@@ -148,4 +161,15 @@ public class ContactHelper extends HelperBase{
                 withEmail(email).withEmail2(email2).withEmail3(email3);
 
     }
+
+    public String infoFromViewForm(ContactData contact) {
+        initContactViewById(contact.getId());
+        String content = wd.findElement(By.id("content")).getText();//getAttribute("value");
+       // JOptionPane.showMessageDialog(null, content); //вывод в сообщении содержимого переменной (для проверки)
+        wd.navigate().back();
+        return content;
+
+    }
+
+
 }
