@@ -39,11 +39,9 @@ public class ContactDataTests extends TestBase{
 
     }
 
+    //этот метод очищает данные со страницы просмотра контакта
     private String specialCleaner(String content) {
         return content.replaceAll("\\s","").replaceAll("-()","").replaceAll("\n",""); //убираем все символы пробелов, табуляций, дефисов, скобок
-
-
-
     }
 
     private String mergeEditData(ContactData contact) { //клеим строки
@@ -67,6 +65,7 @@ public class ContactDataTests extends TestBase{
 
     }
 
+    //этот метод очищает данные со страницы редактирования контакта
     public static String cleaned(String contactData){
         return contactData.replaceAll("\\s","").replaceAll("-()",""); //убираем все символы пробелов, табуляций, дефисов, скобок
     }
