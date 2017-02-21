@@ -1,5 +1,8 @@
 package ru.generators;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import com.sun.javafx.binding.StringFormatter;
 import ru.models.ContactData;
 
@@ -12,15 +15,34 @@ import java.util.List;
 
 public class ContactDataGenerator {
 
-    public static void main(String[] args) throws IOException {
-        int count = Integer.parseInt(args[0]); //количесвто контактов
-        File file = new File(args[1]); //путь к файлу
+    @Parameter(names = "-c", description = "Contact count")
+    public int count; //количество контактов
 
-        List<ContactData> contacts = generateContacts(count);
-        save(contacts, file);
+    @Parameter(names = "-f", description = "Target file")
+    public String file; //сам файл
+
+    public static void main(String[] args) throws IOException {
+       // int count = Integer.parseInt(args[0]); //количесвто контактов
+        //File file = new File(args[1]); //путь к файлу
+
+        ContactDataGenerator generator = new ContactDataGenerator();
+        JCommander jCommander = new JCommander(generator);
+        try {
+            jCommander.parse(args);
+        } catch (ParameterException ex){
+            jCommander.usage();
+            return;
+        }
+        generator.run();
     }
 
-    private static List<ContactData> generateContacts(int count){
+    private void run() throws IOException {
+        List<ContactData> contacts = generateContacts(count);
+        save(contacts, new File(file));
+    }
+
+
+    private List<ContactData> generateContacts(int count){
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++)
             contacts.add(new ContactData().withFirstname(String.format("Екатерина %s", i))
@@ -35,7 +57,7 @@ public class ContactDataGenerator {
         return contacts;
     }
 
-    private static void save(List<ContactData> contacts, File file) throws IOException {
+    private void save(List<ContactData> contacts, File file) throws IOException {
         System.out.println(new File(".").getAbsolutePath());
         Writer writer = new FileWriter(file);
         for (ContactData contact : contacts){
