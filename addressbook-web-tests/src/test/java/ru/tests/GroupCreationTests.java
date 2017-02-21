@@ -1,19 +1,33 @@
 package ru.tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.models.GroupData;
 import ru.models.Groups;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class  GroupCreationTests extends TestBase{
 
-    @Test
-    public void  testGroupCreation() {
+    @DataProvider //провайдет тестовых данных
+    public Iterator<Object[]> validGroups(){
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[]{new GroupData().withName("test 1").withHeader("header 1").withFooter("footer 1")});
+        list.add(new Object[]{new GroupData().withName("test 2").withHeader("header 2").withFooter("footer 2")});
+        list.add(new Object[]{new GroupData().withName("test 3").withHeader("header 3").withFooter("footer 3")});
+        return list.iterator();
+    }
+
+    @Test(dataProvider = "validGroups")
+    public void  testGroupCreation(GroupData group) {
         app.goTo().groupPage();
         Groups before = app.group().all();
-        GroupData group = new GroupData().withName("test1").withHeader("test2").withFooter("test3");
+        // GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
         app.group().create(group);
         assertThat(app.group().сount(),equalTo(before.size() + 1)); //хешированная проверка
         Groups after = app.group().all();
