@@ -22,7 +22,7 @@ public class ContactDataGenerator {
     public String file; //сам файл
 
     public static void main(String[] args) throws IOException {
-       // int count = Integer.parseInt(args[0]); //количесвто контактов
+        // int count = Integer.parseInt(args[0]); //количесвто контактов
         //File file = new File(args[1]); //путь к файлу
 
         ContactDataGenerator generator = new ContactDataGenerator();
