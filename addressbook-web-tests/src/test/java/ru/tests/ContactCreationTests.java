@@ -22,7 +22,7 @@ public class ContactCreationTests extends TestBase{
         }
         app.goTo().goToHomePage();
         app.goTo().addContactPage();
-        File photo = new File("src/1.jpg");
+        File photo = new File("src/2.PNG");
         ContactData contact = new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97,91").withGroup("[none]").withHomePhone("+79787397913").withEmail("nikita.baliassniy@gmail.com").withEmail2("dfsf").withPhoto(photo);
         app.contact().create(contact,true);
         assertThat(app.contact().count(),equalTo(before.size() + 1)); //сравниваем кол-во контактов до начала теста добавления - и после
