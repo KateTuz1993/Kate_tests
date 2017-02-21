@@ -1,5 +1,7 @@
 package ru.models;
 
+import java.io.File;
+
 public class ContactData {
 
 
@@ -19,6 +21,17 @@ public class ContactData {
     private String email2;
     private String email3;
     private String allEmails;
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    private File photo;
 
 
     //геттеры

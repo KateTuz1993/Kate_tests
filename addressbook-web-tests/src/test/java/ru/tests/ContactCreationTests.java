@@ -5,6 +5,8 @@ import ru.models.ContactData;
 import ru.models.Contacts;
 import ru.models.GroupData;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -20,7 +22,8 @@ public class ContactCreationTests extends TestBase{
         }
         app.goTo().goToHomePage();
         app.goTo().addContactPage();
-        ContactData contact = new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97,91").withHomePhone("+79787397913").withEmail("nikita.baliassniy@gmail.com").withEmail2("dfsf").withGroup("test2");
+        File photo = new File("src/1.jpg");
+        ContactData contact = new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97,91").withGroup("[none]").withHomePhone("+79787397913").withEmail("nikita.baliassniy@gmail.com").withEmail2("dfsf").withPhoto(photo);
         app.contact().create(contact,true);
         assertThat(app.contact().count(),equalTo(before.size() + 1)); //сравниваем кол-во контактов до начала теста добавления - и после
         Contacts after = app.contact().all();
@@ -29,6 +32,15 @@ public class ContactCreationTests extends TestBase{
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c)->c.getId()).max().getAsInt()))));
 
+    }
+
+    @Test (enabled = false)
+    public void testCurrentDir(){
+        File currentDir = new File("");
+        System.out.println(currentDir.getAbsolutePath());
+        File photo = new File("src/1.jpg");
+        System.out.println(photo.getAbsolutePath());
+        System.out.println(photo.exists()); //существует ли файл картинки
     }
 
 }
