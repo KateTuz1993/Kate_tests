@@ -50,9 +50,9 @@ public class ContactDataTests extends TestBase{
         String workPhone = contact.getWorkPhone();
 
         //проверки - заполнено ли поле. нужны, чтобы добавить буковки вначале номеров
-        if (homePhone != "") homePhone = "H: "+ homePhone;
-        if (mobilePhone != "") mobilePhone = "M: "+ mobilePhone;
-        if (workPhone != "") workPhone = "W: "+ workPhone;
+        if (!homePhone.equals("")) homePhone = "H: "+ homePhone;
+        if (!mobilePhone.equals("")) mobilePhone = "M: "+ mobilePhone;
+        if (!workPhone.equals("")) workPhone = "W: "+ workPhone;
 
         return Arrays.asList(
                 contact.getFirstname(), contact.getLastname(),
