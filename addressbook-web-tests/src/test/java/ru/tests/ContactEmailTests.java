@@ -38,12 +38,9 @@ public class ContactEmailTests extends TestBase{
 
     private String mergeEmails(ContactData contact) { //клеим строки
         return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3()) //список е-мейлов
-               .stream().filter((s)->!s.equals(""))//фильтруем пустые поля
-                .map(ContactEmailTests::cleaned)//убираем лишние символы
+                .stream().filter((s)->!s.equals(""))//фильтруем пустые поля
                 .collect(Collectors.joining("\n"));//клеим сроки
 
     }
-    public static String cleaned(String email){
-        return email.replaceAll("\\s","").replaceAll("[-()]",""); //убираем в телефонах все символы пробелов, табуляций, дефисов, скобок
-    }
+
 }
