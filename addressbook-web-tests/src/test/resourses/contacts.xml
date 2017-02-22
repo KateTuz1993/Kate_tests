@@ -1,35 +1,35 @@
 <list>
-  <ru.models.ContactData>
-    <id>2147483647</id>
+  <contact>
     <firstname>Екатерина 0</firstname>
     <lastname>Тужилкина 0</lastname>
     <company>home 0</company>
     <address>Хрусталева 97, 61 0</address>
+    <group>[none]</group>
     <homePhone>32 11 58 0</homePhone>
     <mobilePhone>+7 978 740 74 21 0</mobilePhone>
     <email>tuz.kat@gmail.com 0</email>
     <email2>t.k@gmail.com 0</email2>
-  </ru.models.ContactData>
-  <ru.models.ContactData>
-    <id>2147483647</id>
+  </contact>
+  <contact>
     <firstname>Екатерина 1</firstname>
     <lastname>Тужилкина 1</lastname>
     <company>home 1</company>
     <address>Хрусталева 97, 61 1</address>
+    <group>[none]</group>
     <homePhone>32 11 58 1</homePhone>
     <mobilePhone>+7 978 740 74 21 1</mobilePhone>
     <email>tuz.kat@gmail.com 1</email>
     <email2>t.k@gmail.com 1</email2>
-  </ru.models.ContactData>
-  <ru.models.ContactData>
-    <id>2147483647</id>
+  </contact>
+  <contact>
     <firstname>Екатерина 2</firstname>
     <lastname>Тужилкина 2</lastname>
     <company>home 2</company>
     <address>Хрусталева 97, 61 2</address>
+    <group>[none]</group>
     <homePhone>32 11 58 2</homePhone>
     <mobilePhone>+7 978 740 74 21 2</mobilePhone>
     <email>tuz.kat@gmail.com 2</email>
     <email2>t.k@gmail.com 2</email2>
-  </ru.models.ContactData>
+  </contact>
 </list>

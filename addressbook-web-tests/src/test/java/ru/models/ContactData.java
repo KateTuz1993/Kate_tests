@@ -1,17 +1,20 @@
 package ru.models;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 
+@XStreamAlias("contact")
 public class ContactData {
-
-
+    @XStreamOmitField //чтобы в файл xml не записывался id
     private int id = Integer.MAX_VALUE; //чтобы создаваемый контакт был всегда последним;
     private String firstname;
     private String middlename;
     private String lastname;
     private String company;
     private String address;
-    private String home_tel;
+  //  private String home_tel;
     private String group;
     private String homePhone;
     private String mobilePhone;
@@ -82,10 +85,6 @@ public class ContactData {
     }
     public ContactData withAddress(String address) {
         this.address = address;
-        return this;
-    }
-    public ContactData withHome_tel(String home_tel) {
-        this.home_tel = home_tel;
         return this;
     }
     public ContactData withGroup(String group) {

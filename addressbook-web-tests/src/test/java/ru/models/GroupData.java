@@ -1,6 +1,11 @@
 package ru.models;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+@XStreamAlias("group")
 public class GroupData {
+    @XStreamOmitField //чтобы в файл xml не записывался id
     private int id = Integer.MAX_VALUE;
     private String name;
     private String header;

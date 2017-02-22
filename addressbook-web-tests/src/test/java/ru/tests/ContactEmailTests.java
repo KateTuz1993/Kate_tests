@@ -21,7 +21,7 @@ public class ContactEmailTests extends TestBase{
 
         if(app.contact().all().size()==0){
             app.goTo().addContactPage();
-            app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97, 61").withHome_tel("+79787397913").withGroup("test2").withEmail("nikita.baliassniy@gmail.com"),true);
+            app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97, 61").withHomePhone("+79787397913").withGroup("test2").withEmail("nikita.baliassniy@gmail.com"),true);
         }
     }
 
