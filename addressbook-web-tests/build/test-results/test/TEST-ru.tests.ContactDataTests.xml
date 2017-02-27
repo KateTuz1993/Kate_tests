@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.tests.ContactDataTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-02-27T14:57:24" hostname="svs-003" time="0.788">
+<testsuite name="ru.tests.ContactDataTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-02-27T16:52:33" hostname="User-Asus" time="1.006">
   <properties/>
-  <testcase name="testContactData" classname="ru.tests.ContactDataTests" time="0.788"/>
+  <testcase name="testContactData" classname="ru.tests.ContactDataTests" time="1.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
