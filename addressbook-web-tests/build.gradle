@@ -9,6 +9,8 @@ dependencies {
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
     compile 'com.beust:jcommander:1.58'
     compile 'com.thoughtworks.xstream:xstream:1.4.9'
+    compile 'ch.qos.logback:logback-classic:1.2.1'
+
 
 
 }
