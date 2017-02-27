@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.tests.GroupDeletionTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-02-27T14:56:44" hostname="svs-003" time="2.42">
+  <properties/>
+  <testcase name="testgroupDeletion" classname="ru.tests.GroupDeletionTests" time="2.42"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

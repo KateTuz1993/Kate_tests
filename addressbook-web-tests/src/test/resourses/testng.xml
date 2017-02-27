@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Groups" >
+        <classes>
+            <class name="ru.tests.GroupCreationTests" />
+            <class name="ru.tests.GroupModificationTests" />
+            <class name="ru.tests.GroupDeletionTests" />
+        </classes>
+    </test>
+
+    <test name="Contacts">
+        <classes>
+            <class name="ru.tests.ContactCreationTests"/>
+            <class name="ru.tests.ContactModificationTests"/>
+            <class name="ru.tests.ContactPhoneTests"/>
+            <class name="ru.tests.ContactEmailTests"/>
+            <class name="ru.tests.ContactAddressTest"/>
+            <class name="ru.tests.ContactDeletionTests"/>
+            <class name="ru.tests.ContactDataTests"/>
+
+        </classes>
+    </test>
+</suite>

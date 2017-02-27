@@ -55,7 +55,7 @@ public class ContactDataTests extends TestBase{
         if (!workPhone.equals("")) workPhone = "W: "+ workPhone;
 
         return Arrays.asList(
-                contact.getFirstname(), contact.getLastname(),
+                contact.getFirstname(), contact.getLastname(),contact.getCompany(),
                 contact.getAddress(),homePhone, mobilePhone, workPhone,
                 contact.getEmail(), contact.getEmail2(), contact.getEmail3())
                 .stream()

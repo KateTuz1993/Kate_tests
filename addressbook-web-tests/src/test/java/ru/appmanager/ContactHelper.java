@@ -149,6 +149,7 @@ public class ContactHelper extends HelperBase{
         initContactModifyById(contact.getId());
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String company = wd.findElement(By.name("company")).getAttribute("value");
         String address = wd.findElement(By.name("address")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
@@ -157,7 +158,7 @@ public class ContactHelper extends HelperBase{
         String email2 = wd.findElement(By.name("email2")).getAttribute("value");
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
-        return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withAddress(address).
+        return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withCompany(company).withAddress(address).
                 withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).
                 withEmail(email).withEmail2(email2).withEmail3(email3);
 
@@ -166,7 +167,7 @@ public class ContactHelper extends HelperBase{
     public String infoFromViewForm(ContactData contact) {
         initContactViewById(contact.getId());
         String content = wd.findElement(By.id("content")).getText();//getAttribute("value");
-       // JOptionPane.showMessageDialog(null, content); //вывод в сообщении содержимого переменной (для проверки)
+       //JOptionPane.showMessageDialog(null, content); //вывод в сообщении содержимого переменной (для проверки)
         wd.navigate().back();
         return content;
 

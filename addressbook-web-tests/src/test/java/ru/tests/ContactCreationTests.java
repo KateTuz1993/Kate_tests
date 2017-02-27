@@ -25,18 +25,18 @@ public class ContactCreationTests extends TestBase{
 
     @DataProvider //провайдет тестовых данных
     public Iterator<Object[]> validContacts() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resourses/contacts.xml")));
-        String xml = "";
-        String line =  reader.readLine();
-        while (line != null) {
-            xml += line;
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resourses/contacts.xml")))) {
+            String xml = "";
+            String line =  reader.readLine();
+            while (line != null) {
+                xml += line;
+                line = reader.readLine();
+            }
+            XStream xstream = new XStream();
+            xstream.processAnnotations(ContactData.class);
+            List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml); //приведение типов - считываем объект типа Контакт
+            return contacts.stream().map((g)->new Object[] {g}).collect(Collectors.toList()).iterator(); //список массивов с элементами типа Контакт
         }
-        XStream xstream = new XStream();
-        xstream.processAnnotations(ContactData.class);
-        List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml); //приведение типов - считываем объект типа Контакт
-        return contacts.stream().map((g)->new Object[] {g}).collect(Collectors.toList()).iterator(); //список массивов с элементами типа Контакт
-
 
     }
 
