@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.tests.ContactCreationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-02-27T16:59:49" hostname="User-Asus" time="17.274">
+<testsuite name="ru.tests.ContactCreationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-02-27T17:38:25" hostname="User-Asus" time="24.644">
   <properties/>
-  <testcase name="testContactCreation[0](ContactData{id='0', firstname='Р•РєР°С‚РµСЂРёРЅР° 0', lastname='РўСѓР¶РёР»РєРёРЅР° 0', address='РҐСЂСѓСЃС‚Р°Р»РµРІР° 97, 61 0'})" classname="ru.tests.ContactCreationTests" time="7.555"/>
-  <testcase name="testContactCreation[1](ContactData{id='0', firstname='Р•РєР°С‚РµСЂРёРЅР° 1', lastname='РўСѓР¶РёР»РєРёРЅР° 1', address='РҐСЂСѓСЃС‚Р°Р»РµРІР° 97, 61 1'})" classname="ru.tests.ContactCreationTests" time="4.947"/>
-  <testcase name="testContactCreation[2](ContactData{id='0', firstname='Р•РєР°С‚РµСЂРёРЅР° 2', lastname='РўСѓР¶РёР»РєРёРЅР° 2', address='РҐСЂСѓСЃС‚Р°Р»РµРІР° 97, 61 2'})" classname="ru.tests.ContactCreationTests" time="4.772"/>
+  <testcase name="testContactCreation[0](ContactData{id='0', firstname='Р•РєР°С‚РµСЂРёРЅР° 0', lastname='РўСѓР¶РёР»РєРёРЅР° 0', address='РҐСЂСѓСЃС‚Р°Р»РµРІР° 97, 61 0'})" classname="ru.tests.ContactCreationTests" time="11.007"/>
+  <testcase name="testContactCreation[1](ContactData{id='0', firstname='Р•РєР°С‚РµСЂРёРЅР° 1', lastname='РўСѓР¶РёР»РєРёРЅР° 1', address='РҐСЂСѓСЃС‚Р°Р»РµРІР° 97, 61 1'})" classname="ru.tests.ContactCreationTests" time="6.893"/>
+  <testcase name="testContactCreation[2](ContactData{id='0', firstname='Р•РєР°С‚РµСЂРёРЅР° 2', lastname='РўСѓР¶РёР»РєРёРЅР° 2', address='РҐСЂСѓСЃС‚Р°Р»РµРІР° 97, 61 2'})" classname="ru.tests.ContactCreationTests" time="6.744"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
