@@ -5,10 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.File;
 
 @XStreamAlias("contact")
@@ -20,78 +17,66 @@ public class ContactData {
     @Column(name = "id")
     private int id = Integer.MAX_VALUE; //чтобы создаваемый контакт был всегда последним;
 
-    @Expose
     @Column(name = "firstname")
-    @Type(type = "text")
     private String firstname;
 
-    @Expose
     @Column(name = "middlename")
-    @Type(type = "text")
     private String middlename;
 
-    @Expose
     @Column(name = "lastname")
-    @Type(type = "text")
     private String lastname;
 
-    @Expose
     @Column(name = "company")
-    @Type(type = "text")
+   // @Type(type = "text")
     private String company;
 
-    @Expose
     @Column(name = "address")
     @Type(type = "text")
     private String address;
 
+    @Transient
     private String group;
 
-    @Expose
     @Column(name = "home")
     @Type(type = "text")
     private String homePhone;
 
-    @Expose
+
     @Column(name = "mobile")
     @Type(type = "text")
     private String mobilePhone;
 
-    @Expose
+
     @Column(name = "work")
     @Type(type = "text")
     private String workPhone;
+
+    @Transient
     private String allPhones;
 
-    @Expose
+
     @Column(name = "email")
     @Type(type = "text")
     private String email;
 
-    @Expose
+
     @Column(name = "email2")
     @Type(type = "text")
     private String email2;
 
-    @Expose
+
     @Column(name = "email3")
     @Type(type = "text")
     private String email3;
+
+    @Transient
     private String allEmails;
 
-    public File getPhoto() {
-        return photo;
-    }
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
-    public ContactData withPhoto(File photo) {
-        this.photo = photo;
-        return this;
-    }
-
-    private File photo;
-
-
-    //геттеры
+        //геттеры
     public int getId() { return id;    }
     public String getFirstname() {   return firstname;   }
     public String getMiddlename() {
@@ -113,7 +98,10 @@ public class ContactData {
     public String getEmail3() {   return email3;    }
     public String getAllPhones() {    return allPhones;   }
     public String getAllEmails() {    return allEmails;   }
-   // public String getContactContent() {    return content;   }
+
+    public File getPhoto() {
+        return new File(photo);
+    }
 
 
     //сеттеры
@@ -181,8 +169,10 @@ public class ContactData {
         this.allEmails = allEmails;
         return this;
     }
-
-
+    public ContactData withPhoto(File photo) {
+        this.photo = photo.getPath();
+        return this;
+    }
 
 
     @Override

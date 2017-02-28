@@ -25,7 +25,7 @@ public class ContactCreationTests extends TestBase{
 
     @DataProvider //провайдет тестовых данных
     public Iterator<Object[]> validContacts() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resourses/contacts.xml")))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
             String xml = "";
             String line =  reader.readLine();
             while (line != null) {
