@@ -1,27 +1,81 @@
 package ru.models;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.File;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name ="addressbook")
 public class ContactData {
     @XStreamOmitField //чтобы в файл xml не записывался id
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE; //чтобы создаваемый контакт был всегда последним;
+
+    @Expose
+    @Column(name = "firstname")
+    @Type(type = "text")
     private String firstname;
+
+    @Expose
+    @Column(name = "middlename")
+    @Type(type = "text")
     private String middlename;
+
+    @Expose
+    @Column(name = "lastname")
+    @Type(type = "text")
     private String lastname;
+
+    @Expose
+    @Column(name = "company")
+    @Type(type = "text")
     private String company;
+
+    @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
-  //  private String home_tel;
+
     private String group;
+
+    @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
+
+    @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
     private String allPhones;
+
+    @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
+
+    @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
+
+    @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
     private String allEmails;
 
