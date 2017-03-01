@@ -36,6 +36,7 @@ public class ContactModificationTests extends TestBase{
 
         //сравнение множеств контактов до и после модификации
        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+     //   verifyContactListInUI();
 
     }
 

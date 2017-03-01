@@ -1,14 +1,14 @@
 package ru.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.models.GroupData;
 import ru.models.Groups;
 
-import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTests extends TestBase
 {
@@ -25,19 +25,20 @@ public class GroupModificationTests extends TestBase
     @Test
     public void testGroupModification(){
 
-        Groups before = app.db().groups();
+        Groups before = app.db().groups(); //загружаем список групп из БД
         GroupData modifiedGroup = before.iterator().next(); //первый попавшийся элемент множетсва
         //int index = before.size()-1; // индекс последней группы
         GroupData group = new GroupData()
                 .withId(modifiedGroup.getId()).withName("test2").withHeader("test3").withFooter("test4");
+        app.goTo().groupPage();
         app.group().modify(group);
         Assert.assertEquals(app.group().сount(),before.size()); // хешированная проверка
         Groups after = app.db().groups();
         //сравнение множеств групп до и после модификации
-        MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(modifiedGroup).withAdded(group)));
+        assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+        verifyGroupListInUI();
 
     }
-
 
 
 

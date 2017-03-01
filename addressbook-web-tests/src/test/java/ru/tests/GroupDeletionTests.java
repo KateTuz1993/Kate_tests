@@ -33,6 +33,8 @@ public class  GroupDeletionTests extends TestBase{
         assertThat(app.group().сount(), equalTo(before.size()-1));
         Groups after = app.db().groups();
         Assert.assertEquals(after.size(),before.size()-1);
+        //чтобы включить проверку: указать в конфигурации теста в поле VM options значение -DverifyUI=true
+        verifyGroupListInUI();
 
 
 

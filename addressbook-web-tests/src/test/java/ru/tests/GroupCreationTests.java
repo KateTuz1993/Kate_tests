@@ -52,6 +52,8 @@ public class  GroupCreationTests extends TestBase{
         // сравнение множеств групп до и после добавления
         assertThat(after, equalTo(
                before.withAdded(group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
+        //чтобы включить проверку: указать в конфигурации теста в поле VM options значение -DverifyUI=true
+        verifyGroupListInUI();
 
 
     }
