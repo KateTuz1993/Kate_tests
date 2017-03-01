@@ -24,7 +24,7 @@ public class  GroupCreationTests extends TestBase{
 
     @DataProvider //провайдет тестовых данных
     public Iterator<Object[]> validGroups() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resourses/groups.xml")))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))){
             String xml = "";
             String line =  reader.readLine();
             while (line != null) {
@@ -43,11 +43,11 @@ public class  GroupCreationTests extends TestBase{
     public void  testGroupCreation(GroupData group) {
 
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         // GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
         app.group().create(group);
         assertThat(app.group().сount(),equalTo(before.size() + 1)); //хешированная проверка
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
         // сравнение множеств групп до и после добавления
         assertThat(after, equalTo(

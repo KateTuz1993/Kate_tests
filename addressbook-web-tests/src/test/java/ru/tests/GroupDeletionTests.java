@@ -19,7 +19,7 @@ public class  GroupDeletionTests extends TestBase{
     public  void ensurePreconditions(){ // проверка выполения предусловий
         app.goTo().groupPage();
         //проверка существует ли группа для  модификации. если нет - то создаем ее
-        if (app.group().all().size()==0){
+        if (app.db().groups().size() == 0){
             app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
         }
     }
@@ -27,11 +27,11 @@ public class  GroupDeletionTests extends TestBase{
     @Test
     public void testgroupDeletion() {
 
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupData deletedGroup = before.iterator().next(); //первый попавшийся элемент множетсва
         app.group().delete(deletedGroup);
         assertThat(app.group().сount(), equalTo(before.size()-1));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
         Assert.assertEquals(after.size(),before.size()-1);
 
 

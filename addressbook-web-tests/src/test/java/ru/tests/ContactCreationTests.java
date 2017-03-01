@@ -42,7 +42,7 @@ public class ContactCreationTests extends TestBase{
 
     @Test (dataProvider = "validContacts")//(enabled = false)
     public void testContactCreation(ContactData contact) {
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         //проверка есть ли хоть одна группа? если нет, сначала создаем ее
         app.goTo().groupPage();
         if (app.group().all().size()==0){
@@ -54,7 +54,7 @@ public class ContactCreationTests extends TestBase{
         //ContactData contact = new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97,91").withGroup("[none]").withHomePhone("+79787397913").withEmail("nikita.baliassniy@gmail.com").withEmail2("dfsf").withPhoto(photo);
         app.contact().create(contact,true);
         assertThat(app.contact().count(),equalTo(before.size() + 1)); //сравниваем кол-во контактов до начала теста добавления - и после
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
 
         assertThat(after, equalTo(

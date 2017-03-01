@@ -20,9 +20,9 @@ public class ContactAddressTest extends TestBase{
     public  void ensurePreconditions() { // проверка выполения предусловий
         //проверка существует ли контакт. если нет - то создаем его
 
-        if(app.contact().all().size()==0){
+        if(app.db().contacts().size() == 0){
             app.goTo().addContactPage();
-            app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97,61").withHomePhone("+79787397913").withEmail("nikita.balliassniy@gmail.com").withGroup("test2"),true);
+            app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("Хрусталева 97,61").withHomePhone("+79787397913").withEmail("nikita.balliassniy@gmail.com").withGroup("[none]"),true);
         }
     }
 
