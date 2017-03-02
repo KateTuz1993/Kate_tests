@@ -6,6 +6,12 @@ import org.testng.annotations.Test;
 import ru.models.ContactData;
 import ru.models.Contacts;
 
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -35,8 +41,16 @@ public class ContactModificationTests extends TestBase{
         Assert.assertEquals(after.size(),before.size());
 
         //сравнение множеств контактов до и после модификации
-       assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
-     //   verifyContactListInUI();
+      //сортировка списков!!!!
+       // Comparator<? super ContactData> byId = (c1 , c2)-> Integer.compare(c1.getId(), c2.getId());
+
+
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+        JOptionPane.showMessageDialog(null, after);
+        JOptionPane.showMessageDialog(null, (before.without(modifiedContact).withAdded(contact)));
+
+        //чтобы включить - указать в конфигурации теста в поле VM options значение -DverifyUI=true
+        verifyContactListInUI();
 
     }
 

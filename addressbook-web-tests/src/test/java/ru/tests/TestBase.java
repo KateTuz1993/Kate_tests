@@ -16,6 +16,7 @@ import ru.models.Contacts;
 import ru.models.GroupData;
 import ru.models.Groups;
 
+import javax.swing.*;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -65,15 +66,20 @@ public class TestBase {
 
     public void verifyContactListInUI() {
         if(Boolean.getBoolean("verifyUI")) {
+            //вывод в сообщении содержимого переменной (для проверки)
 
             Contacts dbContacts = app.db().contacts();
+            JOptionPane.showMessageDialog(null, dbContacts);
             Contacts uiContacts = app.contact().all();
+            JOptionPane.showMessageDialog(null, uiContacts);
             MatcherAssert.assertThat(uiContacts, CoreMatchers.equalTo(dbContacts.stream()
-                    .map((g) -> new ContactData().withId(g.getId()).withFirstname(g.getFirstname()))
-                    .collect(Collectors.toSet()))); //для каждого объекта типа GroupData, считанного из БД, оставляем только id и имя
+                    .map((g) -> new ContactData().withId(g.getId()).withLastname(g.getLastname())
+                            .withFirstname(g.getFirstname()).withAddress(g.getAddress()))
+                          //  .withAllEmails(g.getAllEmails()).withAllPhones(g.getAllPhones()))
+                    .collect(Collectors.toSet()))); //для каждого объекта типа ContactData, считанного из БД, оставляем только id и имя
         }
-
     }
+
 
 
 }

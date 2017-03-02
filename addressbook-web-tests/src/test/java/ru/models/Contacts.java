@@ -2,10 +2,7 @@ package ru.models;
 
 import com.google.common.collect.ForwardingSet;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Contacts extends ForwardingSet<ContactData> {
 
