@@ -183,19 +183,19 @@ public class ContactData {
         return "ContactData{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
-                ", middlename='" + middlename + '\'' +  //добавила
+                ", middlename='" + middlename + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", company='" + company + '\'' +
                 ", address='" + address + '\'' +
-                ", group='" + group + '\'' +   //добавила
+                ", group='" + group + '\'' +
                 ", homePhone='" + homePhone + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", workPhone='" + workPhone + '\'' +
-                ", allPhones='" + allPhones + '\'' +   //добавила
+                ", allPhones='" + allPhones + '\'' +
                 ", email='" + email + '\'' +
                 ", email2='" + email2 + '\'' +
                 ", email3='" + email3 + '\'' +
-                ", allEmails='" + allEmails + '\'' +  //добавила
+                ", allEmails='" + allEmails + '\'' +
                 '}';
     }
 
@@ -208,9 +208,9 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        if (middlename != null ? !middlename.equals(that.middlename) : that.middlename != null) return false;
+       if (middlename != null ? !middlename.equals(that.middlename) : that.middlename != null) return false;
         if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-        if (company != null ? !company.equals(that.company) : that.company != null) return false;
+       if (company != null ? !company.equals(that.company) : that.company != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (group != null ? !group.equals(that.group) : that.group != null) return false;
         if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;

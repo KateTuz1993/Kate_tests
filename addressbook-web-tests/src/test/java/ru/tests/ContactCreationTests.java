@@ -45,8 +45,9 @@ public class ContactCreationTests extends TestBase{
     public void testContactCreation(ContactData contact) {
         Contacts before = app.db().contacts();
         //проверка есть ли хоть одна группа? если нет, сначала создаем ее
-        app.goTo().groupPage();
+        //app.goTo().groupPage();
         if (app.db().groups().size() == 0){
+            app.goTo().groupPage();
             app.group().create(new GroupData().withName("test2").withHeader("test2").withFooter("test3"));
         }
         app.goTo().goToHomePage();
@@ -56,12 +57,11 @@ public class ContactCreationTests extends TestBase{
         app.contact().create(contact,true);
         assertThat(app.contact().count(),equalTo(before.size() + 1)); //сравниваем кол-во контактов до начала теста добавления - и после
         Contacts after = app.db().contacts();
-        JOptionPane.showMessageDialog(null, "после" + after);
-        JOptionPane.showMessageDialog(null, "до" + before.withAdded(contact.withId(after.stream().mapToInt((c)->c.getId()).max().getAsInt())));
-
 
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c)->c.getId()).max().getAsInt()))));
+        //чтобы включить - указать в конфигурации теста в поле VM options значение -DverifyUIcontact=true
+        verifyContactListInUI(); //проверка множества контактов в БД с множеством на странице home
 
     }
 

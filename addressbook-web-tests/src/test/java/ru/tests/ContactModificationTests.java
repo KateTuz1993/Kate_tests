@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.models.ContactData;
 import ru.models.Contacts;
+import ru.models.GroupData;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -22,6 +23,10 @@ public class ContactModificationTests extends TestBase{
         //проверка существует ли контакт для модификаци. если нет - то создаем его
 
         if(app.db().contacts().size()==0){
+            if (app.db().groups().size() == 0){
+                app.goTo().groupPage();
+                app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
+            }
             app.goTo().addContactPage();
             app.contact().create(new ContactData().withFirstname("Nikita").withLastname("Baliassniy").withAddress("nikita.baliassniy@gmail.com").withHomePhone("+79787397913").withGroup("test1"),true);
         }
@@ -43,13 +48,10 @@ public class ContactModificationTests extends TestBase{
         Assert.assertEquals(after.size(),before.size());
 
         //сравнение множеств контактов до и после модификации
-
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
-        //JOptionPane.showMessageDialog(null, after);
-        //JOptionPane.showMessageDialog(null, (before.without(modifiedContact).withAdded(contact)));
 
         //чтобы включить - указать в конфигурации теста в поле VM options значение -DverifyUIcontact=true
-         verifyContactListInUI();
+         verifyContactListInUI(); //проверка множества контактов в БД с множеством на странице home
 
     }
 

@@ -45,6 +45,8 @@ public class ContactDeletionTests extends TestBase{
         before.remove(deletedContact); //удаляем последний элемент из списка - нужно для сравнения списков
         assertThat(after, equalTo(before.without(deletedContact)));
         Assert.assertEquals(before,after); // сравниваем списки целиком
+        //чтобы включить - указать в конфигурации теста в поле VM options значение -DverifyUIcontact=true
+        verifyContactListInUI(); //проверка множества контактов в БД с множеством на странице home
 
     }
 

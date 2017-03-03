@@ -69,16 +69,30 @@ public class TestBase {
             //вывод в сообщении содержимого переменной (для проверки)
 
             Contacts dbContacts = app.db().contacts();
-            JOptionPane.showMessageDialog(null,"считали из базы: "+ dbContacts);
+            //JOptionPane.showMessageDialog(null,"считали из базы: "+ dbContacts);
             Contacts uiContacts = app.contact().all();
-            JOptionPane.showMessageDialog(null, "считали с интерфейса:" + uiContacts);
+           // JOptionPane.showMessageDialog(null, "считали с интерфейса:" + uiContacts);
+
+
+         //   String allPhones = dbContacts.stream().     ;
+
+
+
+
             MatcherAssert.assertThat(uiContacts, CoreMatchers.equalTo(dbContacts.stream()
-                    .map((c) -> new ContactData().withId(c.getId()).withLastname(c.getLastname()).withCompany(c.getCompany())
-                            .withFirstname(c.getFirstname()).withAddress(c.getAddress()).withGroup(c.getGroup())
-                            .withHomePhone(c.getHomePhone()).withMobilePhone(c.getMobilePhone()).withWorkPhone(c.getWorkPhone())
-                            .withEmail(c.getEmail()).withEmail2(c.getEmail2()).withEmail3(c.getEmail3()))
+                    .map((c) -> new ContactData().withId(c.getId()).withFirstname(c.getFirstname()).withLastname(c.getLastname())
+                            .withAddress(c.getAddress()).withGroup(c.getGroup())
+                            .withAllPhones(phoneCleaner(c.getHomePhone()) + "\n" + phoneCleaner(c.getMobilePhone()) +"\n" + phoneCleaner(c.getWorkPhone()))
+                          //  .withHomePhone().withMobilePhone(c.getMobilePhone()).withWorkPhone(c.getWorkPhone())
+                            .withAllEmails(c.getEmail()+ "\n" + c.getEmail2()+ "\n" +c.getEmail3()))
+                         //   .withEmail(c.getEmail()).withEmail2(c.getEmail2()).withEmail3(c.getEmail3()))
                     .collect(Collectors.toSet()))); //для каждого объекта типа ContactData, считанного из БД, оставляем только id и имя
         }
+
+    }
+
+    public static String phoneCleaner(String phone){
+        return phone.replaceAll("\\s","").replaceAll("[-()]",""); //убираем в телефонах все символы пробелов, табуляций, дефисов, скобок
     }
 
 

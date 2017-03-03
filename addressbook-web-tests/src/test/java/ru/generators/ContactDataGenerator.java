@@ -15,7 +15,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-// конфигурация  в program arguments: -c 15 -f src\test\resourсes\contacts.csv -d xml
+// конфигурация  в program arguments: -f src/test/resources/contacts.xml -c 3 -d xml
 public class ContactDataGenerator {
 
     @Parameter(names = "-c", description = "Contact count")
