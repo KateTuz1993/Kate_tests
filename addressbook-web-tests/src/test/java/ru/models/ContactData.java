@@ -18,63 +18,63 @@ public class ContactData {
     private int id = Integer.MAX_VALUE; //чтобы создаваемый контакт был всегда последним;
 
     @Column(name = "firstname")
-    private String firstname;
+    private String firstname = "";
 
     @Column(name = "middlename")
-    private String middlename;
+    private String middlename = "";
 
     @Column(name = "lastname")
-    private String lastname;
+    private String lastname = "";
 
     @Column(name = "company")
    // @Type(type = "text")
-    private String company;
+    private String company = "";
 
     @Column(name = "address")
     @Type(type = "text")
-    private String address;
+    private String address = "";
 
     @Transient
-    private String group;
+    private String group = "[none]";
 
     @Column(name = "home")
     @Type(type = "text")
-    private String homePhone;
+    private String homePhone = "";
 
 
     @Column(name = "mobile")
     @Type(type = "text")
-    private String mobilePhone;
+    private String mobilePhone = "";
 
 
     @Column(name = "work")
     @Type(type = "text")
-    private String workPhone;
+    private String workPhone = "";
 
     @Transient
-    private String allPhones;
+    private String allPhones = "";
 
 
     @Column(name = "email")
     @Type(type = "text")
-    private String email;
+    private String email = "";
 
 
     @Column(name = "email2")
     @Type(type = "text")
-    private String email2;
+    private String email2 = "";
 
 
     @Column(name = "email3")
     @Type(type = "text")
-    private String email3;
+    private String email3 = "";
 
     @Transient
-    private String allEmails;
+    private String allEmails = "";
 
     @Column(name = "photo")
     @Type(type = "text")
-    private String photo;
+    private String photo = "";
 
         //геттеры
     public int getId() { return id;    }
@@ -183,14 +183,19 @@ public class ContactData {
         return "ContactData{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
+                ", middlename='" + middlename + '\'' +  //добавила
                 ", lastname='" + lastname + '\'' +
+                ", company='" + company + '\'' +
                 ", address='" + address + '\'' +
+                ", group='" + group + '\'' +   //добавила
                 ", homePhone='" + homePhone + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", workPhone='" + workPhone + '\'' +
+                ", allPhones='" + allPhones + '\'' +   //добавила
                 ", email='" + email + '\'' +
                 ", email2='" + email2 + '\'' +
                 ", email3='" + email3 + '\'' +
+                ", allEmails='" + allEmails + '\'' +  //добавила
                 '}';
     }
 
@@ -203,28 +208,38 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+        if (middlename != null ? !middlename.equals(that.middlename) : that.middlename != null) return false;
         if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        if (company != null ? !company.equals(that.company) : that.company != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        if (group != null ? !group.equals(that.group) : that.group != null) return false;
         if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
         if (mobilePhone != null ? !mobilePhone.equals(that.mobilePhone) : that.mobilePhone != null) return false;
         if (workPhone != null ? !workPhone.equals(that.workPhone) : that.workPhone != null) return false;
+        if (allPhones != null ? !allPhones.equals(that.allPhones) : that.allPhones != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
-        return email3 != null ? email3.equals(that.email3) : that.email3 == null;
+        if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
+        return allEmails != null ? allEmails.equals(that.allEmails) : that.allEmails == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (middlename != null ? middlename.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (group != null ? group.hashCode() : 0);
         result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
         result = 31 * result + (mobilePhone != null ? mobilePhone.hashCode() : 0);
         result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
+        result = 31 * result + (allPhones != null ? allPhones.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (email2 != null ? email2.hashCode() : 0);
         result = 31 * result + (email3 != null ? email3.hashCode() : 0);
+        result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
         return result;
     }
 }

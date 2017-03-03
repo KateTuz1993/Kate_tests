@@ -49,7 +49,7 @@ public class TestBase {
         logger.info("Stop test " + m.getName()+ "with parameters " + Arrays.asList(p)); // сообщение в логах
     }
 
-    //сравнивает два множества: полученного с пользовательского инт-са с полученного из БД
+    //сравнивает два множества: полученного с пользовательского инт-са с полученным из БД
     public void verifyGroupListInUI() {
 
 //отключаемая проверка. чтобы включить - необходимо указать в конфигурации теста в поле VM options значение -DverifyUI=true
@@ -65,17 +65,18 @@ public class TestBase {
     }
 
     public void verifyContactListInUI() {
-        if(Boolean.getBoolean("verifyUI")) {
+        if(Boolean.getBoolean("verifyUIcontact")) {
             //вывод в сообщении содержимого переменной (для проверки)
 
             Contacts dbContacts = app.db().contacts();
-            JOptionPane.showMessageDialog(null, dbContacts);
+            JOptionPane.showMessageDialog(null,"считали из базы: "+ dbContacts);
             Contacts uiContacts = app.contact().all();
-            JOptionPane.showMessageDialog(null, uiContacts);
+            JOptionPane.showMessageDialog(null, "считали с интерфейса:" + uiContacts);
             MatcherAssert.assertThat(uiContacts, CoreMatchers.equalTo(dbContacts.stream()
-                    .map((g) -> new ContactData().withId(g.getId()).withLastname(g.getLastname())
-                            .withFirstname(g.getFirstname()).withAddress(g.getAddress()))
-                          //  .withAllEmails(g.getAllEmails()).withAllPhones(g.getAllPhones()))
+                    .map((c) -> new ContactData().withId(c.getId()).withLastname(c.getLastname()).withCompany(c.getCompany())
+                            .withFirstname(c.getFirstname()).withAddress(c.getAddress()).withGroup(c.getGroup())
+                            .withHomePhone(c.getHomePhone()).withMobilePhone(c.getMobilePhone()).withWorkPhone(c.getWorkPhone())
+                            .withEmail(c.getEmail()).withEmail2(c.getEmail2()).withEmail3(c.getEmail3()))
                     .collect(Collectors.toSet()))); //для каждого объекта типа ContactData, считанного из БД, оставляем только id и имя
         }
     }

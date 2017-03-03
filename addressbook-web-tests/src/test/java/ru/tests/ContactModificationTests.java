@@ -34,23 +34,22 @@ public class ContactModificationTests extends TestBase{
         ContactData modifiedContact = before.iterator().next(); //выбираем первый попавшийся контакт
         int index = before.size()-1;
         assertThat(app.contact().count(),equalTo(before.size()));// хешированная проверка
-        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Nikita2").withLastname("Baliassniy2").withAddress("nikita.baliassniy@gmail.com").withHomePhone("+79787397913");
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Nikita2").withMiddlename("Valerievich").withLastname("Baliassniy2").withCompany("home")
+                .withAddress("Хрусталева").withHomePhone("+79787397913").withMobilePhone("324").withWorkPhone("5555")
+                .withEmail("nikita.baliassniy@gmail.com").withEmail2("53465@mail.ru").withEmail3("9786@mail.ru");
 
         app.contact().modify(contact);
         Contacts after = app.db().contacts();
         Assert.assertEquals(after.size(),before.size());
 
         //сравнение множеств контактов до и после модификации
-      //сортировка списков!!!!
-       // Comparator<? super ContactData> byId = (c1 , c2)-> Integer.compare(c1.getId(), c2.getId());
-
 
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
-        JOptionPane.showMessageDialog(null, after);
-        JOptionPane.showMessageDialog(null, (before.without(modifiedContact).withAdded(contact)));
+        //JOptionPane.showMessageDialog(null, after);
+        //JOptionPane.showMessageDialog(null, (before.without(modifiedContact).withAdded(contact)));
 
-        //чтобы включить - указать в конфигурации теста в поле VM options значение -DverifyUI=true
-        verifyContactListInUI();
+        //чтобы включить - указать в конфигурации теста в поле VM options значение -DverifyUIcontact=true
+         verifyContactListInUI();
 
     }
 

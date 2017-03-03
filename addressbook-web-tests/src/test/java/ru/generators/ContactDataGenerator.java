@@ -15,7 +15,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-// конфигурация: -c 15 -f src\test\resourses\contacts.csv -d xml
+// конфигурация  в program arguments: -c 15 -f src\test\resourсes\contacts.csv -d xml
 public class ContactDataGenerator {
 
     @Parameter(names = "-c", description = "Contact count")
@@ -58,13 +58,16 @@ public class ContactDataGenerator {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++)
             contacts.add(new ContactData().withFirstname(String.format("Екатерина %s", i))
+                    .withMiddlename(String.format("Александровна %s", i))
                     .withLastname(String.format("Тужилкина %s", i))
                     .withCompany(String.format("home %s", i))
                     .withAddress(String.format("Хрусталева 97, 61 %s", i))
                     .withHomePhone(String.format("32 11 58 %s", i))
                     .withMobilePhone(String.format("+7 978 740 74 21 %s", i))
+                    .withWorkPhone(String.format("+12345 %s", i))
                     .withEmail(String.format("tuz.kat@gmail.com %s", i))
                     .withEmail2(String.format("t.k@gmail.com %s", i))
+                    .withEmail3(String.format("t.k@otr.ru %s", i))
                     .withGroup(String.format("[none]%s", "")));
 
         return contacts;

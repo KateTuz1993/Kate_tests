@@ -9,6 +9,7 @@ import ru.models.ContactData;
 import ru.models.Contacts;
 import ru.models.GroupData;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -45,7 +46,7 @@ public class ContactCreationTests extends TestBase{
         Contacts before = app.db().contacts();
         //проверка есть ли хоть одна группа? если нет, сначала создаем ее
         app.goTo().groupPage();
-        if (app.group().all().size()==0){
+        if (app.db().groups().size() == 0){
             app.group().create(new GroupData().withName("test2").withHeader("test2").withFooter("test3"));
         }
         app.goTo().goToHomePage();
@@ -55,6 +56,8 @@ public class ContactCreationTests extends TestBase{
         app.contact().create(contact,true);
         assertThat(app.contact().count(),equalTo(before.size() + 1)); //сравниваем кол-во контактов до начала теста добавления - и после
         Contacts after = app.db().contacts();
+        JOptionPane.showMessageDialog(null, "после" + after);
+        JOptionPane.showMessageDialog(null, "до" + before.withAdded(contact.withId(after.stream().mapToInt((c)->c.getId()).max().getAsInt())));
 
 
         assertThat(after, equalTo(
