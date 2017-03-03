@@ -78,10 +78,10 @@ public class TestBase {
 
 
 
-
+            Groups groupsList = app.db().groups();
             MatcherAssert.assertThat(uiContacts, CoreMatchers.equalTo(dbContacts.stream()
                     .map((c) -> new ContactData().withId(c.getId()).withFirstname(c.getFirstname()).withLastname(c.getLastname())
-                            .withAddress(c.getAddress()).withGroup(c.getGroup())
+                            .withAddress(c.getAddress()).inGroup(groupsList.iterator().next().)
                             .withAllPhones(phoneCleaner(c.getHomePhone()) + "\n" + phoneCleaner(c.getMobilePhone()) +"\n" + phoneCleaner(c.getWorkPhone()))
                           //  .withHomePhone().withMobilePhone(c.getMobilePhone()).withWorkPhone(c.getWorkPhone())
                             .withAllEmails(c.getEmail()+ "\n" + c.getEmail2()+ "\n" +c.getEmail3()))

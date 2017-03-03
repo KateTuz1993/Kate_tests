@@ -7,6 +7,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -27,15 +29,14 @@ public class ContactData {
     private String lastname = "";
 
     @Column(name = "company")
-   // @Type(type = "text")
     private String company = "";
 
     @Column(name = "address")
     @Type(type = "text")
     private String address = "";
 
-    @Transient
-    private String group = "[none]";
+   // @Transient
+   // private String group = "[none]";
 
     @Column(name = "home")
     @Type(type = "text")
@@ -76,6 +77,12 @@ public class ContactData {
     @Type(type = "text")
     private String photo = "";
 
+    @ManyToMany(fetch = FetchType.EAGER) //жадный чтобы сразу же извлекалась инфо о связанных группах
+    //в какой таблице указана связь и по какому полю для данного типа - id контакта в поле id
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
+
         //геттеры
     public int getId() { return id;    }
     public String getFirstname() {   return firstname;   }
@@ -89,7 +96,7 @@ public class ContactData {
         return company;
     }
     public String getAddress() {    return address;  }
-    public String getGroup() {   return group;    }
+   // public String getGroup() {   return group;    }
     public String getHomePhone() {   return homePhone;    }
     public String getMobilePhone() {   return mobilePhone;    }
     public String getWorkPhone() {   return workPhone;    }
@@ -132,9 +139,12 @@ public class ContactData {
         this.address = address;
         return this;
     }
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
+  //  public ContactData withGroup(String group) {
+ //       this.group = group;
+  //      return this;  }
+
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
     public ContactData withHomePhone(String home) {
@@ -187,7 +197,7 @@ public class ContactData {
                 ", lastname='" + lastname + '\'' +
                 ", company='" + company + '\'' +
                 ", address='" + address + '\'' +
-                ", group='" + group + '\'' +
+     //           ", group='" + group + '\'' +
                 ", homePhone='" + homePhone + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", workPhone='" + workPhone + '\'' +
@@ -212,7 +222,7 @@ public class ContactData {
         if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
        if (company != null ? !company.equals(that.company) : that.company != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (group != null ? !group.equals(that.group) : that.group != null) return false;
+  //      if (group != null ? !group.equals(that.group) : that.group != null) return false;
         if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
         if (mobilePhone != null ? !mobilePhone.equals(that.mobilePhone) : that.mobilePhone != null) return false;
         if (workPhone != null ? !workPhone.equals(that.workPhone) : that.workPhone != null) return false;
@@ -231,7 +241,7 @@ public class ContactData {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (group != null ? group.hashCode() : 0);
+    //    result = 31 * result + (group != null ? group.hashCode() : 0);
         result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
         result = 31 * result + (mobilePhone != null ? mobilePhone.hashCode() : 0);
         result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
@@ -241,5 +251,10 @@ public class ContactData {
         result = 31 * result + (email3 != null ? email3.hashCode() : 0);
         result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
         return result;
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 }

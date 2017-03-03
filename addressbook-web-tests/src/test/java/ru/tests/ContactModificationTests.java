@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.models.ContactData;
 import ru.models.Contacts;
 import ru.models.GroupData;
+import ru.models.Groups;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -22,13 +23,16 @@ public class ContactModificationTests extends TestBase{
     public  void ensurePreconditions() { // проверка выполения предусловий
         //проверка существует ли контакт для модификаци. если нет - то создаем его
 
+        Groups groupsList = app.db().groups();
+
         if(app.db().contacts().size()==0){
             if (app.db().groups().size() == 0){
                 app.goTo().groupPage();
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.goTo().addContactPage();
-            app.contact().create(new ContactData().withFirstname("Nikita").withLastname("Baliassniy").withAddress("nikita.baliassniy@gmail.com").withHomePhone("+79787397913").withGroup("test1"),true);
+            app.contact().create(new ContactData().withFirstname("Nikita").withLastname("Baliassniy")
+                    .withAddress("nikita.baliassniy@gmail.com").withHomePhone("+79787397913").withGroup("test1"),true);
         }
     }
 
