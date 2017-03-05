@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import ru.models.ContactData;
 import ru.models.Contacts;
+import ru.models.GroupData;
 import ru.models.Groups;
 
 import javax.swing.JOptionPane;
@@ -175,6 +176,28 @@ public class ContactHelper extends HelperBase{
         wd.navigate().back();
         return content;
 
+    }
+
+
+    public void addToGroup(ContactData contact,GroupData group) {
+        selectContactById(contact.getId()); //выбираем последний контакт
+        addContactToGroup(contact, group);
+        acceptContactAdding();
+        contactCache = null; //обнуляем кеш
+
+    }
+
+
+    private void addContactToGroup(ContactData contact, GroupData group) {
+       // JOptionPane.showMessageDialog(null, group.getName()); //вывод в сообщении содержимого переменной (для проверки)
+        new org.openqa.selenium.support.ui.Select(wd.findElement(By.name("to_group")))
+                .selectByVisibleText(group.getName());
+
+
+    }
+
+    private void acceptContactAdding() {
+        click(By.name("add")); //клик по кнопке Add to
     }
 
 

@@ -48,7 +48,7 @@ public class HbConnectionTest {
 
         for (ContactData contact : result2 ) {
             System.out.println(contact);
-            System.out.println(contact.getGroups()); // выводим связанные группы на консоль
+            System.out.println(contact.getGroups().iterator().next().getId()); // выводим связанные группы на консоль
         }
 
     }
