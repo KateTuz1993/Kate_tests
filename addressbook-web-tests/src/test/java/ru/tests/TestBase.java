@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class); //подключаем логирование
 
-    protected static final ApplicationManager app
+    public static final ApplicationManager app
             = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     @BeforeSuite //один запуск браузера и выполенение нескольких тестов
@@ -81,7 +81,7 @@ public class TestBase {
             Groups groupsList = app.db().groups();
             MatcherAssert.assertThat(uiContacts, CoreMatchers.equalTo(dbContacts.stream()
                     .map((c) -> new ContactData().withId(c.getId()).withFirstname(c.getFirstname()).withLastname(c.getLastname())
-                            .withAddress(c.getAddress()).inGroup(groupsList.iterator().next().)
+                            .withAddress(c.getAddress()).inGroup(groupsList.iterator().next())
                             .withAllPhones(phoneCleaner(c.getHomePhone()) + "\n" + phoneCleaner(c.getMobilePhone()) +"\n" + phoneCleaner(c.getWorkPhone()))
                           //  .withHomePhone().withMobilePhone(c.getMobilePhone()).withWorkPhone(c.getWorkPhone())
                             .withAllEmails(c.getEmail()+ "\n" + c.getEmail2()+ "\n" +c.getEmail3()))

@@ -49,9 +49,9 @@ public class ContactHelper extends HelperBase{
 
 
         if (creation){ //если это форма для создания нового контакта
-           Assert.assertTrue(contactData.getGroups().size() == 1); //контакт можно добавить только в одну группу
+      //     Assert.assertTrue(contactData.getGroups().size() == 1); //контакт можно добавить только в одну группу
             new org.openqa.selenium.support.ui.Select(wd.findElement(By.name("new_group")))
-                   .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+                   .selectByVisibleText(contactData.getGroup());
         } else { // если это форма модификации контакте
             Assert.assertFalse(isElementPresent(By.name("new_group")));
             //isElementPresent(By.name("new_group")); //проверка, существует ли поле выбора группы на форме создания (или модификации) контакта

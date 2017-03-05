@@ -30,9 +30,10 @@ public class ContactModificationTests extends TestBase{
                 app.goTo().groupPage();
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
+            Groups groups = app.db().groups();
             app.goTo().addContactPage();
             app.contact().create(new ContactData().withFirstname("Nikita").withLastname("Baliassniy")
-                    .withAddress("nikita.baliassniy@gmail.com").withHomePhone("+79787397913").withGroup("test1"),true);
+                    .withAddress("nikita.baliassniy@gmail.com").withHomePhone("+79787397913").inGroup(groups.iterator().next()),true);
         }
     }
 

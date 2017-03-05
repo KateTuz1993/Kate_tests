@@ -35,8 +35,8 @@ public class ContactData {
     @Type(type = "text")
     private String address = "";
 
-   // @Transient
-   // private String group = "[none]";
+    @Transient
+    private String group = "[none]";
 
     @Column(name = "home")
     @Type(type = "text")
@@ -96,7 +96,7 @@ public class ContactData {
         return company;
     }
     public String getAddress() {    return address;  }
-   // public String getGroup() {   return group;    }
+    public String getGroup() {   return group;    }
     public String getHomePhone() {   return homePhone;    }
     public String getMobilePhone() {   return mobilePhone;    }
     public String getWorkPhone() {   return workPhone;    }
@@ -139,9 +139,9 @@ public class ContactData {
         this.address = address;
         return this;
     }
-  //  public ContactData withGroup(String group) {
- //       this.group = group;
-  //      return this;  }
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;  }
 
     public Groups getGroups() {
         return new Groups(groups);
@@ -197,7 +197,7 @@ public class ContactData {
                 ", lastname='" + lastname + '\'' +
                 ", company='" + company + '\'' +
                 ", address='" + address + '\'' +
-     //           ", group='" + group + '\'' +
+                ", group='" + group + '\'' +
                 ", homePhone='" + homePhone + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", workPhone='" + workPhone + '\'' +
@@ -218,11 +218,11 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-       if (middlename != null ? !middlename.equals(that.middlename) : that.middlename != null) return false;
+        if (middlename != null ? !middlename.equals(that.middlename) : that.middlename != null) return false;
         if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-       if (company != null ? !company.equals(that.company) : that.company != null) return false;
+        if (company != null ? !company.equals(that.company) : that.company != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
-  //      if (group != null ? !group.equals(that.group) : that.group != null) return false;
+        if (group != null ? !group.equals(that.group) : that.group != null) return false;
         if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
         if (mobilePhone != null ? !mobilePhone.equals(that.mobilePhone) : that.mobilePhone != null) return false;
         if (workPhone != null ? !workPhone.equals(that.workPhone) : that.workPhone != null) return false;
@@ -241,7 +241,7 @@ public class ContactData {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
-    //    result = 31 * result + (group != null ? group.hashCode() : 0);
+        result = 31 * result + (group != null ? group.hashCode() : 0);
         result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
         result = 31 * result + (mobilePhone != null ? mobilePhone.hashCode() : 0);
         result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
@@ -257,4 +257,6 @@ public class ContactData {
         groups.add(group);
         return this;
     }
+
+
 }

@@ -7,6 +7,7 @@ import com.sun.javafx.binding.StringFormatter;
 import com.thoughtworks.xstream.XStream;
 import ru.models.ContactData;
 import ru.models.GroupData;
+import ru.models.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ru.tests.TestBase.app;
 
 // конфигурация  в program arguments: -f src/test/resources/contacts.xml -c 3 -d xml
 public class ContactDataGenerator {
@@ -56,6 +59,7 @@ public class ContactDataGenerator {
 
     private List<ContactData> generateContacts(int count){
         List<ContactData> contacts = new ArrayList<ContactData>();
+
         for (int i = 0; i < count; i++)
             contacts.add(new ContactData().withFirstname(String.format("Екатерина %s", i))
                     .withMiddlename(String.format("Александровна %s", i))
@@ -67,8 +71,8 @@ public class ContactDataGenerator {
                     .withWorkPhone(String.format("+12345 %s", i))
                     .withEmail(String.format("tuz.kat@gmail.com %s", i))
                     .withEmail2(String.format("t.k@gmail.com %s", i))
-                    .withEmail3(String.format("t.k@otr.ru %s", i))
-                    .withGroup(String.format("[none]%s", "")));
+                    .withEmail3(String.format("t.k@otr.ru %s", i)));
+       //             .withGroup(String.format("[none] %s", "")));
 
         return contacts;
     }
@@ -86,7 +90,7 @@ public class ContactDataGenerator {
         try (Writer writer = new FileWriter(file)) {
             for (ContactData contact : contacts){
                 writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(),contact.getLastname(),contact.getCompany(), contact.getAddress(),
-                        contact.getHomePhone(), contact.getMobilePhone(), contact.getEmail(), contact.getEmail2(), contact.getGroup()));
+                        contact.getHomePhone(), contact.getMobilePhone(), contact.getEmail(), contact.getEmail2())); //contact.getGroups().....
             }
         }
 

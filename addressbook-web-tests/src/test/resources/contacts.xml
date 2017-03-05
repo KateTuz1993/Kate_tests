@@ -15,6 +15,7 @@
     <email3>t.k@otr.ru 0</email3>
     <allEmails></allEmails>
     <photo></photo>
+    <groups/>
   </contact>
   <contact>
     <firstname>Екатерина 1</firstname>
@@ -32,6 +33,7 @@
     <email3>t.k@otr.ru 1</email3>
     <allEmails></allEmails>
     <photo></photo>
+    <groups/>
   </contact>
   <contact>
     <firstname>Екатерина 2</firstname>
@@ -49,5 +51,6 @@
     <email3>t.k@otr.ru 2</email3>
     <allEmails></allEmails>
     <photo></photo>
+    <groups/>
   </contact>
 </list>

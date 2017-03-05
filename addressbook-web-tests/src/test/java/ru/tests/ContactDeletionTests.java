@@ -29,7 +29,7 @@ public class ContactDeletionTests extends TestBase{
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.goTo().addContactPage();
-            app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("nikita.baliassniy@gmail.com").withHomePhone("+79787397913").withGroup("[none]"),true);
+            app.contact().create(new ContactData().withFirstname("Nikita").withMiddlename("Valerievich").withLastname("Baliassniy").withCompany("Home").withAddress("nikita.baliassniy@gmail.com").withGroup("[none]").withHomePhone("+79787397913"),true);
         }
     }
 
