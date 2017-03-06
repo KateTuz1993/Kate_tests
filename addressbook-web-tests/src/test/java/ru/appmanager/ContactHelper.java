@@ -14,6 +14,8 @@ import ru.models.Groups;
 import javax.swing.JOptionPane;
 
 import java.util.*;
+
+import static ru.tests.TestBase.app;
 //import org.openqa.selenium.support.ui.Select;
 
 public class ContactHelper extends HelperBase{
@@ -180,10 +182,12 @@ public class ContactHelper extends HelperBase{
 
 
     public void addToGroup(ContactData contact,GroupData group) {
+        app.goTo().goToHomePage();
         selectContactById(contact.getId()); //выбираем последний контакт
         addContactToGroup(contact, group);
         acceptContactAdding();
         contactCache = null; //обнуляем кеш
+        app.goTo().goToHomePage();
 
     }
 

@@ -43,22 +43,22 @@ public class HbConnectionTest {
          //   System.out.println(group);
         //}
 
-   //     List<ContactData> result2 = session.createQuery( "from ContactData where deprecated = '0000-00-00'" ).list();
-   //             session.getTransaction().commit();
-    //    session.close();
-
-   //     for (ContactData contact : result2 ) {
-   //         System.out.println(contact);
-    //        System.out.println(contact.getGroups()); // выводим связанные группы на консоль
-    //    }
-        List<ContactAndGroupData> result3 = session.createQuery( "from ContactAndGroupData" ).list();
-        session.getTransaction().commit();
+        List<ContactData> result2 = session.createQuery( "from ContactData where deprecated = '0000-00-00'" ).list();
+                session.getTransaction().commit();
         session.close();
-        for (ContactAndGroupData contactGroup : result3 ){
 
-            System.out.println(contactGroup);
-            //System.out.println(contactGroup.getGroupId());
+        for (ContactData contact : result2 ) {
+            System.out.println(contact);
+            System.out.println(contact.getGroups()); // выводим связанные группы на консоль
         }
+     //   List<ContactAndGroupData> result3 = session.createQuery( "from ContactAndGroupData" ).list();
+     //   session.getTransaction().commit();
+     //   session.close();
+     //   for (ContactAndGroupData contactGroup : result3 ){
+
+     //       System.out.println(contactGroup);
+            //System.out.println(contactGroup.getGroupId());
+      //  }
 
     }
 

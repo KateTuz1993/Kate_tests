@@ -1,7 +1,6 @@
 package ru.tests;
 
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.models.ContactData;
@@ -10,7 +9,6 @@ import ru.models.GroupData;
 import ru.models.Groups;
 
 import javax.swing.*;
-import java.util.Iterator;
 import java.util.Random;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -31,7 +29,7 @@ public class AddContactToGroup extends TestBase {
     }
 
     @Test //(enabled = false)
-    public void testContactDeletion() {
+    public void testContactAddingToGroup() {
         Contacts allContacts = app.db().contacts(); // все контакты
         Groups allGroups = app.db().groups(); //все группы
 
@@ -39,6 +37,7 @@ public class AddContactToGroup extends TestBase {
         GroupData randomGroup = allGroups.iterator().next(); //выбираем первую попавшуюся группу
 
         Groups linkedGroups = modifyingContact.getGroups(); // связанные группы контакта
+        JOptionPane.showMessageDialog(null, "начало" + linkedGroups.size());
 
         final Random random = new Random();
         GroupData selectedGroup = null; //выбранная группа из существующих
@@ -52,45 +51,36 @@ public class AddContactToGroup extends TestBase {
             //добавление контакта в новую группу
             app.goTo().goToHomePage();
             createdGroup = app.db().groups().iterator().next();
-            GroupData newGroup =createdGroup.withName("test " + index);
+            GroupData newGroup = createdGroup.withName("test " + index);
             app.contact().addToGroup(modifyingContact, newGroup);
         } else {
             if (linkedGroups.size() == 0) {
                 app.goTo().goToHomePage();
                 app.contact().addToGroup(modifyingContact, randomGroup);
-            } else {
+                JOptionPane.showMessageDialog(null, modifyingContact.getGroups());
+            } else { //если есть еще группы, в которые можно включить контакт (но уже входит хотя бы в одну)
                 for (GroupData currentGroup : allGroups) {
                     if (!linkedGroups.contains(currentGroup)) {
                         //добавление контакта в группу
-                        app.goTo().goToHomePage();
-                        selectedGroup =  currentGroup;
+                        selectedGroup = currentGroup;
                         app.contact().addToGroup(modifyingContact, currentGroup);
-                         break;
+                        break;
                     }
                 }
             }
         }
 
-        //проверка что контакт добавлен в группу - сравниваем количесвто групп
-        Groups afterGroups = modifyingContact.getGroups();
-        assertThat(afterGroups.size(), equalTo(linkedGroups.size()));
+        //проверка что контакт добавлен в группу - сравниваем количество групп
+        Groups afterGroups = app.db().contacts().getById(modifyingContact.getId()).getGroups();
+        JOptionPane.showMessageDialog(null, "после добавления" + afterGroups.size());
+        assertThat(afterGroups.size(), equalTo(linkedGroups.size() + 1));
 
-     /*
-        if (createdGroup != null){
+        /* if (createdGroup != null){
             JOptionPane.showMessageDialog(null, "создали новую группу и добавили в нее контакт");
-        }
-        else {  if(selectedGroup != null) {
+        } else {  if(selectedGroup != null) {
                 JOptionPane.showMessageDialog(null, "выбрали из существующих группу и добавили в нее контакт");
             }
-        }
-        */
-
-        //сравнение множеств контактов до и после модификации
-        //     assertThat(after, equalTo(allContacts.without(modifyingContact).withAdded(contact)));
-
-        //чтобы включить - указать в конфигурации теста в поле VM options значение -DverifyUIcontact=true
-        //   verifyContactListInUI(); //проверка множества контактов в БД с множеством на странице home
-
+        } */
     }
 }
 

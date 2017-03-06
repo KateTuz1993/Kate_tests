@@ -1,0 +1,56 @@
+<list>
+  <contact>
+    <firstname>Екатерина 0</firstname>
+    <middlename>Александровна 0</middlename>
+    <lastname>Тужилкина 0</lastname>
+    <company>home 0</company>
+    <address>Хрусталева 97, 61 0</address>
+    <group>[none]</group>
+    <homePhone>32 11 58 0</homePhone>
+    <mobilePhone>+7 978 740 74 21 0</mobilePhone>
+    <workPhone>+12345 0</workPhone>
+    <allPhones></allPhones>
+    <email>tuz.kat@gmail.com 0</email>
+    <email2>t.k@gmail.com 0</email2>
+    <email3>t.k@otr.ru 0</email3>
+    <allEmails></allEmails>
+    <photo></photo>
+    <groups/>
+  </contact>
+  <contact>
+    <firstname>Екатерина 1</firstname>
+    <middlename>Александровна 1</middlename>
+    <lastname>Тужилкина 1</lastname>
+    <company>home 1</company>
+    <address>Хрусталева 97, 61 1</address>
+    <group>[none]</group>
+    <homePhone>32 11 58 1</homePhone>
+    <mobilePhone>+7 978 740 74 21 1</mobilePhone>
+    <workPhone>+12345 1</workPhone>
+    <allPhones></allPhones>
+    <email>tuz.kat@gmail.com 1</email>
+    <email2>t.k@gmail.com 1</email2>
+    <email3>t.k@otr.ru 1</email3>
+    <allEmails></allEmails>
+    <photo></photo>
+    <groups/>
+  </contact>
+  <contact>
+    <firstname>Екатерина 2</firstname>
+    <middlename>Александровна 2</middlename>
+    <lastname>Тужилкина 2</lastname>
+    <company>home 2</company>
+    <address>Хрусталева 97, 61 2</address>
+    <group>[none]</group>
+    <homePhone>32 11 58 2</homePhone>
+    <mobilePhone>+7 978 740 74 21 2</mobilePhone>
+    <workPhone>+12345 2</workPhone>
+    <allPhones></allPhones>
+    <email>tuz.kat@gmail.com 2</email>
+    <email2>t.k@gmail.com 2</email2>
+    <email3>t.k@otr.ru 2</email3>
+    <allEmails></allEmails>
+    <photo></photo>
+    <groups/>
+  </contact>
+</list>
