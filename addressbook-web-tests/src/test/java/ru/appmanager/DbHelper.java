@@ -6,10 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.models.ContactData;
-import ru.models.Contacts;
-import ru.models.GroupData;
-import ru.models.Groups;
+import ru.models.*;
 
 import java.util.List;
 
@@ -43,5 +40,15 @@ public class DbHelper {
         session.getTransaction().commit();
         session.close();
         return new Contacts(result2);
+    }
+
+
+    public ContactsAndGroups contactInGroup(){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactAndGroupData> result3 = session.createQuery("from ContactInGroupData").list();
+        session.getTransaction().commit();
+        session.close();
+        return new ContactsAndGroups(result3);
     }
 }

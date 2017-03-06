@@ -41,6 +41,8 @@ public class AddContactToGroup extends TestBase {
         Groups linkedGroups = modifyingContact.getGroups(); // связанные группы контакта
 
         final Random random = new Random();
+        GroupData selectedGroup = null; //выбранная группа из существующих
+        GroupData createdGroup = null; //созданная новая группа для добавления в нее контакта
 
         if (linkedGroups.equals(allGroups)) { //если контакт уже входит во все группы, то создаем новую группу
             app.goTo().groupPage();
@@ -49,7 +51,8 @@ public class AddContactToGroup extends TestBase {
             app.group().create(new GroupData().withName("test " + index).withHeader("test " + index).withFooter("test " + index));
             //добавление контакта в новую группу
             app.goTo().goToHomePage();
-            GroupData newGroup = app.db().groups().iterator().next().withName("test " + index);
+            createdGroup = app.db().groups().iterator().next();
+            GroupData newGroup =createdGroup.withName("test " + index);
             app.contact().addToGroup(modifyingContact, newGroup);
         } else {
             if (linkedGroups.size() == 0) {
@@ -60,25 +63,27 @@ public class AddContactToGroup extends TestBase {
                     if (!linkedGroups.contains(currentGroup)) {
                         //добавление контакта в группу
                         app.goTo().goToHomePage();
+                        selectedGroup =  currentGroup;
                         app.contact().addToGroup(modifyingContact, currentGroup);
-                        break;
+                         break;
                     }
                 }
             }
-
         }
 
+        //проверка что контакт добавлен в группу - сравниваем количесвто групп
+        Groups afterGroups = modifyingContact.getGroups();
+        assertThat(afterGroups.size(), equalTo(linkedGroups.size()));
 
-        //ContactData contact = new ContactData().withId(modifyingContact.getId()).withFirstname("Nikita2").withMiddlename("Valerievich").withLastname("Baliassniy2").withCompany("home")
-        //        .withAddress("Хрусталева").withHomePhone("+79787397913").withMobilePhone("324").withWorkPhone("5555")
-        //       .withEmail("nikita.baliassniy@gmail.com").withEmail2("53465@mail.ru").withEmail3("9786@mail.ru");
-
-
-        //    app.goTo().goToHomePage(); //необходио для хрома
-        //   assertThat(app.contact().count(),equalTo(allContacts.size()));// хешированная проверка
-
-        //    Contacts after = app.db().contacts();
-        //    Assert.assertEquals(after.size(),allContacts.size());
+     /*
+        if (createdGroup != null){
+            JOptionPane.showMessageDialog(null, "создали новую группу и добавили в нее контакт");
+        }
+        else {  if(selectedGroup != null) {
+                JOptionPane.showMessageDialog(null, "выбрали из существующих группу и добавили в нее контакт");
+            }
+        }
+        */
 
         //сравнение множеств контактов до и после модификации
         //     assertThat(after, equalTo(allContacts.without(modifyingContact).withAdded(contact)));
