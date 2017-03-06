@@ -72,7 +72,7 @@ public class AddContactToGroup extends TestBase {
 
         //проверка что контакт добавлен в группу - сравниваем количество групп
         Groups afterGroups = app.db().contacts().getById(modifyingContact.getId()).getGroups();
-        JOptionPane.showMessageDialog(null, "после добавления" + afterGroups.size());
+        //JOptionPane.showMessageDialog(null, "после добавления" + afterGroups.size());
         assertThat(afterGroups.size(), equalTo(linkedGroups.size() + 1));
 
         /* if (createdGroup != null){

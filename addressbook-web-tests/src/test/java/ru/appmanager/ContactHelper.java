@@ -196,12 +196,29 @@ public class ContactHelper extends HelperBase{
        // JOptionPane.showMessageDialog(null, group.getName()); //вывод в сообщении содержимого переменной (для проверки)
         new org.openqa.selenium.support.ui.Select(wd.findElement(By.name("to_group")))
                 .selectByVisibleText(group.getName());
-
-
     }
 
     private void acceptContactAdding() {
         click(By.name("add")); //клик по кнопке Add to
+    }
+
+    public void removeContactFromGroup(ContactData contact, String selectedGroupName) {
+        app.goTo().goToHomePage();
+        //ContactData contact = app.db().contacts().iterator().next();
+        selectedGroupByName(selectedGroupName);
+        selectContactById(contact.getId());
+        pressRemoveButton();
+        app.goTo().goToHomePage();
+
+    }
+
+    private void selectedGroupByName(String selectedGroupName) {
+        new org.openqa.selenium.support.ui.Select(wd.findElement(By.name("group")))
+                .selectByVisibleText(selectedGroupName);
+    }
+
+    private void pressRemoveButton() {
+        click(By.name("remove"));
     }
 
 
