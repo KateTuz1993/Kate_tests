@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/sandbox/src/main/main.iml" filepath="$PROJECT_DIR$/sandbox/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sandbox/src/test/test.iml" filepath="$PROJECT_DIR$/sandbox/src/test/test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/addressbook-web-tests/src/test/test1.iml" filepath="$PROJECT_DIR$/addressbook-web-tests/src/test/test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" group="mantis-tests" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" group="mantis-tests" />
     </modules>
   </component>
 </project>
