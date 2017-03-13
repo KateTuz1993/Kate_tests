@@ -41,8 +41,8 @@ public class ApplicationManager {
             wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         }
 
-        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wd.get(properties.getProperty("web.baseURL"));
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wd.get(properties.getProperty("web.baseUrl"));
 
     }
 
@@ -50,5 +50,12 @@ public class ApplicationManager {
         wd.quit();
     }
 
+    public HttpSession newSession (){
+        return new HttpSession(this);
+    }
 
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 }
