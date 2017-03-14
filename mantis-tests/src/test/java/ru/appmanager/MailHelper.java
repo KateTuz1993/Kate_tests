@@ -1,0 +1,55 @@
+package ru.appmanager;
+
+import org.subethamail.wiser.Wiser;
+import org.subethamail.wiser.WiserMessage;
+import ru.model.MailMessage;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MailHelper {
+
+    private  ApplicationManager app;
+    private final Wiser wiser;
+
+    public MailHelper(ApplicationManager app){
+        this.app = app;
+        wiser = new Wiser(); //почтовый сервер
+    }
+
+    //метод для ожидания писем. должно прийти количество count писем за время до timeout
+    public List<MailMessage> waitForMail(int count, long timeout) throws MessagingException, IOException {
+        long start = System.currentTimeMillis();
+        while (System.currentTimeMillis() < start + timeout){ //не истекло ли время ожидания
+            if (wiser.getMessages().size() >= count){ //если пришло ожидаемое количество писем
+                return wiser.getMessages().stream().map((m) -> toModelMail(m)).collect(Collectors.toList());
+            }
+            try{
+                Thread.sleep(1000); // подождать 1000 миллисекунд
+            } catch (InterruptedException e ){
+                e.printStackTrace();
+            }
+        }
+        throw new Error("No mail :(");
+    }
+     public static MailMessage toModelMail(WiserMessage m){
+        try {
+            MimeMessage mm = m.getMimeMessage();
+            return new MailMessage(mm.getAllRecipients()[0].toString(), (String) mm.getContent());
+        } catch (MessagingException e){
+            e.printStackTrace();
+            return null;
+        } catch (IOException e){
+            e.printStackTrace();
+            return null;
+        }
+     }
+
+     public void start(){wiser.start();}
+
+     public void stop() {wiser.stop();}
+
+}
