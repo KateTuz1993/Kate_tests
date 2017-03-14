@@ -21,9 +21,9 @@ public class RegistrationTests extends  TestBase{
 
     @Test
     public void testRegistration() throws IOException, MessagingException {
-        String user = "user1";
+        String user = "user8";
         String password = "password";
-        String email = "user1@localhost.localdomain";
+        String email = "user8@localhost.localdomain";
         app.registration().start(user, email);
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
@@ -37,7 +37,7 @@ public class RegistrationTests extends  TestBase{
         return regex.getText(mailMessage.text);
     }
 
-    @AfterMethod//(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void stopMailServer(){
         app.mail().stop();
     }

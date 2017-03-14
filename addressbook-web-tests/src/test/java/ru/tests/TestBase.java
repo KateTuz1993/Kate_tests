@@ -26,7 +26,7 @@ public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class); //подключаем логирование
 
     public static final ApplicationManager app
-            = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+            = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
     @BeforeSuite //один запуск браузера и выполенение нескольких тестов
     public void setUp() throws Exception {
