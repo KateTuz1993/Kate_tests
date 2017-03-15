@@ -4,7 +4,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
-import ru.model.MailMessage;
+import ru.models.MailMessage;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -21,9 +21,10 @@ public class RegistrationTests extends  TestBase{
 
     @Test
     public void testRegistration() throws IOException, MessagingException {
-        String user = "user8";
+        long now = System.currentTimeMillis(); //индекс для уникальности пользователей
+        String user = String.format("user%s", now);
         String password = "password";
-        String email = "user8@localhost.localdomain";
+        String email = String.format("user%s@localhost.localdomain", now);
         app.registration().start(user, email);
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
         String confirmationLink = findConfirmationLink(mailMessages, email);

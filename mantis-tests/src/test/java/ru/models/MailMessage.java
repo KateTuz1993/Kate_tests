@@ -1,4 +1,4 @@
-package ru.model;
+package ru.models;
 
 public class MailMessage {
 

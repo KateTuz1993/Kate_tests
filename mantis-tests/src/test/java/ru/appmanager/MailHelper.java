@@ -2,7 +2,7 @@ package ru.appmanager;
 
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
-import ru.model.MailMessage;
+import ru.models.MailMessage;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
