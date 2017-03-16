@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "mantis_user_table")
 public class UserData {
 
-    @XStreamOmitField //чтобы в файл xml не записывался id
+    @XStreamOmitField
     @Id
     @Column(name = "id")
     private int id = 0;
@@ -29,11 +29,16 @@ public class UserData {
    // @Type(type = "text")
     private String password = "";
 
+    @Column(name = "access_level")
+    private short access_level = 25;
+
+
     //геттеры
     public int getId() { return id;    }
     public String getUsername() {   return username;   }
     public String getEmail() {   return email;   }
     public String getPassword() {   return password;   }
+    public int getAccess_level() {   return access_level;   }
 
     //сеттеры
     public UserData withId(int id) {
@@ -53,7 +58,10 @@ public class UserData {
         this.password = password;
         return this;
     }
-
+    public UserData withAccessLevel(short access_level) {
+        this.access_level = access_level;
+        return this;
+    }
 
     @Override
     public String toString() {
@@ -62,6 +70,7 @@ public class UserData {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", access_level='" + access_level + '\'' +
                 '}';
     }
 
@@ -73,6 +82,7 @@ public class UserData {
         UserData userData = (UserData) o;
 
         if (id != userData.id) return false;
+        if (access_level != userData.access_level) return false;
         if (username != null ? !username.equals(userData.username) : userData.username != null) return false;
         if (email != null ? !email.equals(userData.email) : userData.email != null) return false;
         return password != null ? password.equals(userData.password) : userData.password == null;
@@ -84,6 +94,7 @@ public class UserData {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + access_level;
         return result;
     }
 }

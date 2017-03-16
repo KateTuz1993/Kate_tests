@@ -3,7 +3,9 @@ package ru.appmanager;
 import com.sun.xml.internal.ws.api.message.HeaderList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import javax.swing.*;
 
 
 public class RegistationHelper extends HelperBase{
@@ -38,8 +40,8 @@ public class RegistationHelper extends HelperBase{
     public void gotoResetUsersPassword(String username){
         click(By.linkText("управление"));
         click(By.linkText("Управление пользователями"));
-        //click(By.xpath("//form[@id='manage-user-reset-form']/fieldset/span/input"));
+        //JOptionPane.showMessageDialog(null,"это в функции "+ username);
         click(By.linkText(username));
-        click(By.xpath("//form[@id='manage-user-reset-form']/fieldset/span/input"));
+        click(By.xpath(".//*[@id='manage-user-reset-form']/fieldset/span/input"));
     }
 }
