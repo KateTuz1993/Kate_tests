@@ -33,7 +33,7 @@ public class RegistationHelper extends HelperBase{
         wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
         type(By.name("username"),username);
         type(By.name("password"),password);
-        click(By.cssSelector("input[value='Войти']"));
+        click(By.cssSelector("input.btn-success"));
 
     }
 
