@@ -5,9 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" group="addressbook-web-tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" group="addressbook-web-tests" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" group="mantis-tests" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" group="mantis-tests" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests1.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests1_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests1_main.iml" group="mantis-tests1" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests1_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests1_test.iml" group="mantis-tests1" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample2.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample2_main.iml" group="soap-sample2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample2_test.iml" group="soap-sample2" />
     </modules>
   </component>
 </project>
