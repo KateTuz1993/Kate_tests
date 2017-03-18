@@ -23,6 +23,23 @@ public class SoapHelper {
         this.app = app;
     }
 
+    //метод для установления соединения
+    public MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
+        return new MantisConnectLocator()
+                .getMantisConnectPort(new URL(app.getProperty("mantis.soap")));
+    }
+
+    //для получения множества багов для проекта
+    public Set<Issue> getIssues(Project project) throws MalformedURLException, RemoteException, ServiceException {
+        MantisConnectPortType mc = getMantisConnect();
+        IssueData[] issues = mc
+                .mc_project_get_issues("administrator", "root", BigInteger.valueOf(project.getId()), BigInteger.valueOf(1),BigInteger.valueOf(4)); //получить список багов для определенного проекта
+        return Arrays.asList(issues).stream()
+                .map((p) -> new Issue().withId(p.getId().intValue()).withSummary(p.getSummary())
+                        .withDescription(p.getDescription()).withStatus(p.getStatus().getName())).collect(Collectors.toSet());
+    }
+
+    //для получения множества проектов
     public Set<Project> getProjects() throws MalformedURLException, RemoteException, ServiceException {
         MantisConnectPortType mc = getMantisConnect();
         ProjectData[] projects = mc
@@ -31,13 +48,9 @@ public class SoapHelper {
                 .map((p) -> new Project().withId(p.getId().intValue()).withName(p.getName())).collect(Collectors.toSet());
     }
 
-    private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
-        return new MantisConnectLocator()
-                    .getMantisConnectPort(new URL(app.getProperty("mantis.soap")));
-    }
-
+    //для регистрации нового обращения (бага)
     public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
-        MantisConnectPortType mc = getMantisConnect();//открываем соединение
+        MantisConnectPortType mc = getMantisConnect(); //открываем соединение
         String[] categories = mc.mc_project_get_categories("administrator", "root", BigInteger.valueOf(issue.getProject().getId()));//запрашиваем категории (для создания баг репорта)
         IssueData issueData = new IssueData();
         issueData.setSummary(issue.getSummary());
