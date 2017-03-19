@@ -8,6 +8,8 @@
       <module name="mantis-tests1_test" target="1.8" />
       <module name="mantis-tests_main" target="1.8" />
       <module name="mantis-tests_test" target="1.8" />
+      <module name="rest-sample_main" target="1.8" />
+      <module name="rest-sample_test" target="1.8" />
       <module name="soap-sample1_main" target="1.8" />
       <module name="soap-sample1_test" target="1.8" />
       <module name="soap-sample2_main" target="1.8" />
