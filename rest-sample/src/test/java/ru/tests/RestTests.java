@@ -27,6 +27,7 @@ public class RestTests extends TestBase{
     @Test
     public void testCreateIssue() throws IOException {
         Set<Issue> oldIssues = getIssues();
+        System.out.println(oldIssues.size());
         Issue newIssue = new Issue().withSubject("test_Kate").withDescription("good_test");
         int issueId = createIssue(newIssue);
         Set<Issue> newIssues = getIssues();
@@ -35,14 +36,6 @@ public class RestTests extends TestBase{
 
     }
 
-    private Set<Issue> getIssues() throws IOException {
-        //отправляем запрос на получение списка всех баг репортов и хотим получить ответ в формате json
-        String json = getExecutor().execute(Request.Get("http://demo.bugify.com/api/issues.json"))
-                .returnContent().asString();
-        JsonElement parsed = new JsonParser().parse(json);
-        JsonElement issues = parsed.getAsJsonObject().get("issues");//получаем список багов
-        return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
-    }
 
     private int createIssue(Issue newIssue) throws IOException {
         String json =  getExecutor().execute(Request.Post("http://demo.bugify.com/api/issues.json")
@@ -54,7 +47,5 @@ public class RestTests extends TestBase{
         return issue_id;
     }
 
-    public Executor getExecutor() {
-        return Executor.newInstance().auth("LSGjeU4yP1X493ud1hNniA==","");
-    }
+
 }

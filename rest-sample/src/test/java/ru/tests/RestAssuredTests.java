@@ -27,16 +27,16 @@ public class RestAssuredTests extends TestBase {
 
     @Test
     public void testCreateIssue() throws IOException {
-        Set<Issue> oldIssues = getIssues();
+        Set<Issue> oldIssues = getIssues1();
         Issue newIssue = new Issue().withSubject("test_Kate").withDescription("good_test");
         int issueId = createIssue(newIssue);
-        Set<Issue> newIssues = getIssues();
+        Set<Issue> newIssues = getIssues1();
         oldIssues.add(newIssue.withId(issueId));
         assertEquals(newIssues, oldIssues);
 
     }
 
-    private Set<Issue> getIssues() throws IOException {
+    private Set<Issue> getIssues1() throws IOException {
 
         //отправляем запрос на получение списка всех баг репортов и хотим получить ответ в формате json
         String json = RestAssured.get("http://demo.bugify.com/api/issues.json").asString();

@@ -5,7 +5,7 @@ public class Issue {
     private int id;
     private String subject;
     private String description;
-    private String status;
+    private int state;
 
     public int getId() {
         return id;
@@ -19,8 +19,8 @@ public class Issue {
         return description;
     }
 
-    public String getStatus() {
-        return status;
+    public int getState() {
+        return state;
     }
 
     //сеттеры
@@ -39,8 +39,8 @@ public class Issue {
         return this;
     }
 
-    public Issue withStatus(String status) {
-        this.status = status;
+    public Issue withState(int state) {
+        this.state = state;
         return this;
     }
 
@@ -52,9 +52,9 @@ public class Issue {
         Issue issue = (Issue) o;
 
         if (id != issue.id) return false;
+        if (state != issue.state) return false;
         if (subject != null ? !subject.equals(issue.subject) : issue.subject != null) return false;
-        if (description != null ? !description.equals(issue.description) : issue.description != null) return false;
-        return status != null ? status.equals(issue.status) : issue.status == null;
+        return description != null ? description.equals(issue.description) : issue.description == null;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Issue {
         int result = id;
         result = 31 * result + (subject != null ? subject.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + state;
         return result;
     }
 }
