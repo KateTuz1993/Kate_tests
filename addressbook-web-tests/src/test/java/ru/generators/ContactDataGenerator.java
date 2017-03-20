@@ -3,6 +3,8 @@ package ru.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sun.javafx.binding.StringFormatter;
 import com.thoughtworks.xstream.XStream;
 import ru.models.ContactData;
@@ -18,7 +20,7 @@ import java.util.List;
 
 import static ru.tests.TestBase.app;
 
-// конфигурация  в program arguments: -f src/test/resources/contacts.xml -c 3 -d xml
+// конфигурация  в program arguments: -c 15 -f addressbook-web-tests\src\test\resources\groups.json -d json
 public class ContactDataGenerator {
 
     @Parameter(names = "-c", description = "Contact count")
@@ -51,6 +53,8 @@ public class ContactDataGenerator {
             saveAsCsv(contacts, new File(file));
         } else if (format.equals("xml")) {
             saveAsXml(contacts, new File(file));
+        } else if (format.equals("json")) {
+            saveAsJson(contacts, new File(file));
         } else {
             System.out.println("Unrecognized format" + format);
         }
@@ -85,6 +89,14 @@ public class ContactDataGenerator {
             writer.write(xml);
         }
     }
+    private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(contacts);
+        Writer writer = new FileWriter(file);
+        writer.write(json);
+        writer.close();
+    }
+
     private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
         System.out.println(new File(".").getAbsolutePath());
         try (Writer writer = new FileWriter(file)) {
