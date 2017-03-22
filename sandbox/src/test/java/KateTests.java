@@ -17,7 +17,7 @@ public class KateTests {
     public void testDistance2() {
         Point point1 = new Point(-55, 55);
         Point point2 = new Point(-28, 195);
-        Assert.assertEquals(point1.distanceMethod(point2), 482);
+        Assert.assertEquals(point1.distanceMethod(point2), 142.57980221616245);
         // assert(point1.distanceMethod(point2))==25;
     }
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.tests.GroupDeletionTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-02-27T16:51:51" hostname="User-Asus" time="2.17">
+<testsuite name="ru.tests.GroupDeletionTests" tests="1" skipped="1" failures="0" errors="0" timestamp="2017-03-21T20:59:24" hostname="User-Asus" time="0.0">
   <properties/>
-  <testcase name="testgroupDeletion" classname="ru.tests.GroupDeletionTests" time="2.17"/>
+  <testcase name="testgroupDeletion" classname="ru.tests.GroupDeletionTests" time="0.0">
+    <skipped/>
+  </testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
