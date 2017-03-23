@@ -7,11 +7,7 @@
         <classes>
             <class name="ru.tests.ContactCreationTests"/>
             <class name="ru.tests.ContactModificationTests"/>
-            <class name="ru.tests.ContactPhoneTests"/>
-            <class name="ru.tests.ContactEmailTests"/>
-            <class name="ru.tests.ContactAddressTest"/>
             <class name="ru.tests.ContactDeletionTests"/>
-            <class name="ru.tests.ContactDataTests"/>
 
         </classes>
     </test>
