@@ -8,6 +8,7 @@
             <class name="ru.tests.ContactCreationTests"/>
             <class name="ru.tests.ContactModificationTests"/>
             <class name="ru.tests.ContactDeletionTests"/>
+            <class name="ru.tests.ContactDataTests"/>
 
         </classes>
     </test>
